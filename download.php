@@ -1,7 +1,8 @@
 <?php
 session_start();
 $path = $_SESSION["target_dir"] . $_SESSION["unique_ID"] . '/';
-$file = $path . pathinfo($_SESSION["target_file"], PATHINFO_FILENAME) . '.html';
+$file = $path . pathinfo($_SESSION["target_file"], PATHINFO_FILENAME) . '.zip';
+$file = $path . 'converted' . '.zip';
 
 if (file_exists($file)) {
     // no echo before this point

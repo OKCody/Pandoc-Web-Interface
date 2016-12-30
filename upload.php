@@ -16,24 +16,29 @@ $imageFileType = pathinfo($_SESSION["target_file"],PATHINFO_EXTENSION);
 
 //echo $unique_ID . '/' . $target_file;
 
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-    $check = filesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check) {
-        //file is of non-zero size
-        $uploadOk = 1;
-    } else {
-        echo "Error: Filesize = 0 bytes.";
-        $uploadOk = 0;
+// Check if image file is a actual file or fake file
+if($imageFileType == "zip" || $imageFileType == "ZIP"){
+    $uploadOk = 1;
+} else {
+    if(isset($_POST["submit"])) {
+        $check = filesize($_FILES["fileToUpload"]["tmp_name"]);
+        if($check) {
+            //file is of non-zero size
+            $uploadOk = 1;
+        } else {
+            echo "Error: Filesize = 0 bytes.";
+            $uploadOk = 0;
+        }
     }
 }
+
 // Check if file already exists
 if (file_exists($target_dir . $_SESSION["unique_ID"] . $_SESSION["target_file"])) {
     echo "Error: File already exists.";
     $uploadOk = 0;
 }
 // Check file size
-if ($_FILES["fileToUpload"]["size"] > 2000000) {
+if ($_FILES["fileToUpload"]["size"] > 10000000) {
     echo "Error: File is too large. Limit = 2Mb";
     $uploadOk = 0;
 }
@@ -54,7 +59,9 @@ if ($uploadOk == 0) {
             <input type='submit' name='submit' value='Download File' />
         </form>";
     } else {
+        echo $_FILES["fileToUpload"]["tmp_name"];
         echo "Error: There was an error uploading your file.";
+        //use echo phpinfo(); to check max_upload_size should if file being uploaded is larger than this setting this error will be returned.
     }
 }
 
