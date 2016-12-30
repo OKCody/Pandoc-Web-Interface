@@ -39,7 +39,7 @@ if ($_FILES["fileToUpload"]["size"] > 2000000) {
 }
 // Allow certain file formats
 if($imageFileType != "md" && $imageFileType != "MD" && $imageFileType != "txt"
-&& $imageFileType != "TXT" && $imageFileType != "zip") && $imageFileType != "ZIP"){
+&& $imageFileType != "TXT" && $imageFileType != "zip" && $imageFileType != "ZIP"){
     echo "Error: Supported filetypes are .md, .txt, and .zip";
     $uploadOk = 0;
 }
