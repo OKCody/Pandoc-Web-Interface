@@ -14,7 +14,7 @@ shell_exec("mkdir $target_dir/$unique_ID");
 $uploadOk = 1;
 $imageFileType = pathinfo($_SESSION["target_file"],PATHINFO_EXTENSION);
 
-echo $unique_ID . '/' . $target_file;
+//echo $unique_ID . '/' . $target_file;
 
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
@@ -48,7 +48,7 @@ if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $_SESSION["target_file"])) {
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $_SESSION["target_dir"] . $_SESSION["unique_ID"] . '/' . $_SESSION["target_file"])) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         echo "<form action='download.php' method='post'>
             <input type='submit' name='submit' value='Download File' />
@@ -58,9 +58,8 @@ if ($uploadOk == 0) {
     }
 }
 
-shell_exec("mv $target_file $target_dir/$unique_ID/$target_file");
 shell_exec("bash convert.sh $target_dir/$unique_ID/");
 
-echo $target_dir . $_SESSION["unique_ID"] . '/' . $_SESSION["target_file"] . '.' . html;
+//echo $target_dir . $_SESSION["unique_ID"] . '/' . $_SESSION["target_file"];
 
 ?>

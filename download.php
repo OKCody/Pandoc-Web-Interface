@@ -1,6 +1,7 @@
 <?php
 session_start();
-$file = $_SESSION["target_dir"] . $_SESSION["unique_ID"] . '/' . $_SESSION["target_file"] . '.' . html;
+$path = $_SESSION["target_dir"] . $_SESSION["unique_ID"] . '/';
+$file = $path . pathinfo($_SESSION["target_file"], PATHINFO_FILENAME) . '.html';
 
 if (file_exists($file)) {
     // no echo before this point
