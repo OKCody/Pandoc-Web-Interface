@@ -20,32 +20,32 @@ $imageFileType = pathinfo($_SESSION["target_file"],PATHINFO_EXTENSION);
 if(isset($_POST["submit"])) {
     $check = filesize($_FILES["fileToUpload"]["tmp_name"]);
     if($check) {
-        echo "File is an image - " . $check["mime"] . ".";
+        //file is of non-zero size
         $uploadOk = 1;
     } else {
-        echo "File is not an image.";
+        echo "Error: Filesize = 0 bytes.";
         $uploadOk = 0;
     }
 }
 // Check if file already exists
 if (file_exists($target_dir . $_SESSION["unique_ID"] . $_SESSION["target_file"])) {
-    echo "Sorry, file already exists.";
+    echo "Error: File already exists.";
     $uploadOk = 0;
 }
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 2000000) {
-    echo "Sorry, your file is too large.";
+    echo "Error: File is too large. Limit = 2Mb";
     $uploadOk = 0;
 }
 // Allow certain file formats
-if($imageFileType != "JPG" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" && $imageFileType != "md") {
-    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+if($imageFileType != "md" && $imageFileType != "MD" && $imageFileType != "txt"
+&& $imageFileType != "TXT" && $imageFileType != "zip") && $imageFileType != "ZIP"){
+    echo "Error: Supported filetypes are .md, .txt, and .zip";
     $uploadOk = 0;
 }
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-    echo "Sorry, your file was not uploaded.";
+    echo "Error: Your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $_SESSION["target_dir"] . $_SESSION["unique_ID"] . '/' . $_SESSION["target_file"])) {
@@ -54,7 +54,7 @@ if ($uploadOk == 0) {
             <input type='submit' name='submit' value='Download File' />
         </form>";
     } else {
-        echo "Sorry, there was an error uploading your file.";
+        echo "Error: There was an error uploading your file.";
     }
 }
 
