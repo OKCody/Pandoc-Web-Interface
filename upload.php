@@ -10,6 +10,13 @@ $unique_ID = $_SESSION["unique_ID"];
 $_SESSION["target_file"] = basename($_FILES["fileToUpload"]["name"]);
 $target_file = $_SESSION["target_file"];
 
+echo $target_dir . "<br>";
+echo $unique_ID . "<br>";
+echo $target_file . "<br>";
+echo $_FILES["fileToUpload"]["tmp_name"] . "<br>";
+
+phpinfo();
+
 shell_exec("mkdir $target_dir/$unique_ID");
 $uploadOk = 1;
 $imageFileType = pathinfo($_SESSION["target_file"],PATHINFO_EXTENSION);
@@ -38,8 +45,8 @@ if (file_exists($target_dir . $_SESSION["unique_ID"] . $_SESSION["target_file"])
     $uploadOk = 0;
 }
 // Check file size
-if ($_FILES["fileToUpload"]["size"] > 10000000) {
-    echo "Error: File is too large. Limit = 2Mb";
+if ($_FILES["fileToUpload"]["size"] > 104857600) {
+    echo "Error: File is too large. Limit = 100Mb";
     $uploadOk = 0;
 }
 // Allow certain file formats
