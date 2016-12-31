@@ -7,12 +7,14 @@ then
 unzip -j *.zip    # unzip into working directory without subdirectories
 fi
 
-# convert all .md files pass in conversion option on $2
-for filename in *.md
+for output in $2 $3 $4
 do
-pandoc $filename -f markdown -t html -o $(echo $filename | cut -f 1 -d '.').html
+  # convert all .md files passed in conversion option on $2
+  for filename in *.md
+  do
+  pandoc $filename -f markdown -o $(echo $filename | cut -f 1 -d '.').$output
+  done
 done
-
 # zip all files in working directory into an archive excluding any .zip files
 zip converted.zip * -x *.zip
 

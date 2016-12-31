@@ -10,12 +10,12 @@ $unique_ID = $_SESSION["unique_ID"];
 $_SESSION["target_file"] = basename($_FILES["fileToUpload"]["name"]);
 $target_file = $_SESSION["target_file"];
 
-echo $target_dir . "<br>";
-echo $unique_ID . "<br>";
-echo $target_file . "<br>";
-echo $_FILES["fileToUpload"]["tmp_name"] . "<br>";
+//echo $target_dir . "<br>";
+//echo $unique_ID . "<br>";
+//echo $target_file . "<br>";
+//echo $_FILES["fileToUpload"]["tmp_name"] . "<br>";
 
-phpinfo();
+//phpinfo();
 
 shell_exec("mkdir $target_dir/$unique_ID");
 $uploadOk = 1;
@@ -72,7 +72,32 @@ if ($uploadOk == 0) {
     }
 }
 
-shell_exec("bash convert.sh $target_dir/$unique_ID/");
+
+// end upload error checking, and validation
+
+$output2 = '';
+$output3 = '';
+$output4 = '';
+if (isset($_POST['HTML'])) {
+    $output2 = 'html';
+    echo "HTML set<br>";
+
+}
+if (isset($_POST['PDF'])) {
+    $output3 = 'pdf';
+    echo "PDF set<br>";
+}
+if (isset($_POST['DOCX'])) {
+    $output4 = 'docx';
+    echo "DOCX set<br>";
+}
+
+echo $output;
+
+
+
+
+shell_exec("bash convert.sh $target_dir/$unique_ID/ $output2 $output3 $output4");
 
 //echo $target_dir . $_SESSION["unique_ID"] . '/' . $_SESSION["target_file"];
 
