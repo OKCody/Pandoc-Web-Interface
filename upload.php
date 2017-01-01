@@ -75,29 +75,40 @@ if ($uploadOk == 0) {
 
 // end upload error checking, and validation
 
+// read in output formats
 $output2 = '';
 $output3 = '';
 $output4 = '';
 if (isset($_POST['HTML'])) {
     $output2 = 'html';
-    echo "HTML set<br>";
-
 }
 if (isset($_POST['PDF'])) {
     $output3 = 'pdf';
-    echo "PDF set<br>";
 }
 if (isset($_POST['DOCX'])) {
     $output4 = 'docx';
-    echo "DOCX set<br>";
+}
+if (!isset($_POST['HTML']) && !isset($_POST['PDF']) && !isset($_POST['DOCX'])){
+    echo "Make a selection";
+    $message = "Make a selection.";
+}
+
+
+$stylesheet = $_POST['stylesheet']; // empty string corresponds to "false"
+echo $stylesheet;
+if ($stylesheet == "retro") {
+    $stylesheet = 'stylesheets/retro.css';
+}
+if ($stylesheet == "screen") {
+    $stylesheet = 'stylesheets/screen.css';
+}
+if ($stylesheet == "avenir-white") {
+    $stylesheet = 'stylesheets/avenir-white.css';
 }
 
 echo $output;
 
-
-
-
-shell_exec("bash convert.sh $target_dir/$unique_ID/ $output2 $output3 $output4");
+shell_exec("bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4 ");
 
 //echo $target_dir . $_SESSION["unique_ID"] . '/' . $_SESSION["target_file"];
 
