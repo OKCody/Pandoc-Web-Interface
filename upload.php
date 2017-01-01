@@ -20,6 +20,7 @@ $target_file = $_SESSION["target_file"];
 shell_exec("mkdir $target_dir/$unique_ID");
 $uploadOk = 1;
 $imageFileType = pathinfo($_SESSION["target_file"],PATHINFO_EXTENSION);
+$message = '';
 
 //echo $unique_ID . '/' . $target_file;
 
@@ -33,7 +34,7 @@ if($imageFileType == "zip" || $imageFileType == "ZIP"){
             //file is of non-zero size
             $uploadOk = 1;
         } else {
-            echo "Error: Filesize = 0 bytes.";
+            $message = $message . "Error: Filesize = 0 bytes or no file selected. Please uploade a file of non-zero size. <br>";
             $uploadOk = 0;
         }
     }
@@ -41,37 +42,35 @@ if($imageFileType == "zip" || $imageFileType == "ZIP"){
 
 // Check if file already exists
 if (file_exists($target_dir . $_SESSION["unique_ID"] . $_SESSION["target_file"])) {
-    echo "Error: File already exists.";
+    $message = $message . "Error: File already exists. <br>";
     $uploadOk = 0;
 }
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 104857600) {
-    echo "Error: File is too large. Limit = 100Mb";
+    $message = $message . "Error: File is too large. Limit = 100Mb <br>";
     $uploadOk = 0;
 }
 // Allow certain file formats
 if($imageFileType != "md" && $imageFileType != "MD" && $imageFileType != "txt"
 && $imageFileType != "TXT" && $imageFileType != "zip" && $imageFileType != "ZIP"){
-    echo "Error: Supported filetypes are .md, .txt, and .zip";
+    $message = $message . "Error: Supported filetypes are .md, .txt, and .zip <br>";
     $uploadOk = 0;
 }
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-    echo "Error: Your file was not uploaded.";
+    $message = $message . "Error: Your file was not uploaded. <br>";
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $_SESSION["target_dir"] . $_SESSION["unique_ID"] . '/' . $_SESSION["target_file"])) {
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        $message = $message . "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded. <br>";
         echo "<form action='download.php' method='post'>
             <input type='submit' name='submit' value='Download File' />
         </form>";
     } else {
-        echo $_FILES["fileToUpload"]["tmp_name"];
-        echo "Error: There was an error uploading your file.";
+        $message = $message . "Error: There was an error uploading your file. <br>";
         //use echo phpinfo(); to check max_upload_size should if file being uploaded is larger than this setting this error will be returned.
     }
 }
-
 
 // end upload error checking, and validation
 
@@ -89,13 +88,11 @@ if (isset($_POST['DOCX'])) {
     $output4 = 'docx';
 }
 if (!isset($_POST['HTML']) && !isset($_POST['PDF']) && !isset($_POST['DOCX'])){
-    echo "Make a selection";
-    $message = "Make a selection.";
+    $message = $message . "Error: No output format selected. <br>";
 }
 
 
 $stylesheet = $_POST['stylesheet']; // empty string corresponds to "false"
-echo $stylesheet;
 if ($stylesheet == "retro") {
     $stylesheet = 'stylesheets/retro.css';
 }
@@ -106,10 +103,9 @@ if ($stylesheet == "avenir-white") {
     $stylesheet = 'stylesheets/avenir-white.css';
 }
 
-echo $output;
-
 shell_exec("bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4 ");
 
 //echo $target_dir . $_SESSION["unique_ID"] . '/' . $_SESSION["target_file"];
 
+echo $message;
 ?>
