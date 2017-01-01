@@ -3,7 +3,6 @@
 // Start the session and housekeeping
 session_start();
 date_default_timezone_set('America/Chicago');
-shell_exec("mkdir $target_dir/$unique_ID");
 
 // File path variables
 $_SESSION["target_dir"] = "uploads/";
@@ -12,10 +11,12 @@ $_SESSION["unique_ID"] = date(YmdHis) . _ . uniqid();
 $unique_ID = $_SESSION["unique_ID"];
 $_SESSION["target_file"] = basename($_FILES["fileToUpload"]["name"]);
 $target_file = $_SESSION["target_file"];
-$imageFileType = pathinfo($_SESSION["target_file"],PATHINFO_EXTENSION);
+
 
 // Status variables
+shell_exec("mkdir $target_dir/$unique_ID");
 $uploadOk = 1;
+$imageFileType = pathinfo($_SESSION["target_file"],PATHINFO_EXTENSION);
 $message = '';
 
 // Check if image file is a actual file or fake file

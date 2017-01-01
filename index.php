@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <link rel="stylesheet" type="text/css" href="normalize.css">
+  <link rel="stylesheet" type="text/css" href="skeleton.css">
+</head>
 <body>
 
 <form action="upload.php" method="post" enctype="multipart/form-data">
