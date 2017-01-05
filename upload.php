@@ -57,9 +57,10 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $_SESSION["target_dir"] . $_SESSION["unique_ID"] . '/' . $_SESSION["target_file"])) {
         $message = $message . "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded. <br>";
-        echo "<form action='download.php' method='post'>
-            <input type='submit' name='submit' value='Download File' />
-        </form>";
+        //echo "<form action='download.php' method='post'>
+        //    <input type='submit' name='submit' value='Download File' />
+        //</form>";
+        header("Location: download.php");
     } else {
         // If a file was indeed selected to be uploaded and this error is still
         //  being thrown,the error is more than likely being caused by something
@@ -107,6 +108,9 @@ if ($stylesheet == "avenir-white") {
 // Optins here are passed to convert.sh script and their purposes are detailed
 //  on the first few lines of convert.sh
 shell_exec("bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4 ");
+
+// When executed without error download file directly to index.php
+header("index.html");
 
 // Display accumulated error messages.
 echo $message;

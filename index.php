@@ -20,40 +20,44 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" type="text/css" href="normalize.css">
   <link rel="stylesheet" type="text/css" href="skeleton.css">
+  <link rel="stylesheet" type="text/css" href="custom.css">
+
 </head>
 <body>
-  <div class="row">
-    <div class="twelve columns">
-      <h1>Markdown File Converter</h1>
-    </div>
-  </div>
-  <form action="upload.php" method="post" enctype="multipart/form-data">
-    <div class="row">
-      <div class="twelve columns">
-        Select file to upload:
-        <input type="file" name="fileToUpload" id="fileToUpload"></input>
+  <div class="container">
+    <div class="row" id="title">
+      <div class="twelve columns uploadForm">
+        <h1>Markdown File Converter</h1>
       </div>
     </div>
-    <div class="row">
-      <div class="twelve columns">
-        Output formats:
-        HTML <input type="checkbox" name="HTML" value="HTML"></input>
-        PDF <input type="checkbox" name="PDF" value="PDF"></input>
-        DOCX <input type="checkbox" name="DOCX" value="DOCX"></input>
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+      <div class="row">
+        <div class="twelve columns uploadForm">
+          <b>Select file to upload </b>
+          <input type="file" name="fileToUpload" id="fileToUpload"></input>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="twelve columns">
-        none <input type="radio" name="stylesheet" value="none" checked="checked"></input>
-        retro.css <input type="radio" name="stylesheet" value="retro"></input>
-        screen.css <input type="radio" name="stylesheet" value="screen"></input>
-        avenir-white.css <input type="radio" name="stylesheet" value="avenir-white"></input>
-
+      <div class="row">
+        <div class="twelve columns uploadForm">
+          <b>Output formats: </b>
+          <input type="checkbox" name="HTML" value="HTML">HTML</input>
+          <input type="checkbox" name="PDF" value="PDF">PDF</input>
+          <input type="checkbox" name="DOCX" value="DOCX">DOCX</input>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="twelve columns">
-        <input type="submit" value="Upload" name="submit"></input>
+      <div class="row">
+        <div class="twelve columns uploadForm">
+          <b>Stylesheet: </b>
+           <input type="radio" name="stylesheet" value="none" checked="checked">none</input>
+           <input type="radio" name="stylesheet" value="retro">retro.css</input>
+           <input type="radio" name="stylesheet" value="screen">screen.css</input>
+          <input type="radio" name="stylesheet" value="avenir-white">avenir-white.css</input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="twelve columns uploadForm">
+          <input type="submit" value="Convert" name="submit"></input>
+        </div>
       </div>
     </div>
   </form>
