@@ -50,16 +50,31 @@ if($imageFileType != "md" && $imageFileType != "MD" && $imageFileType != "txt"
     $message = $message . "Error: Supported filetypes are .md, .txt, and .zip <br>";
     $uploadOk = 0;
 }
+// read in output formats
+$output2 = '';
+$output3 = '';
+$output4 = '';
+if (isset($_POST["HTML"])) {
+    $output2 = 'html';
+}
+if (isset($_POST["PDF"])) {
+    $output3 = 'pdf';
+}
+if (isset($_POST["DOCX"])) {
+    $output4 = 'docx';
+}
+if (empty($output2) && empty($output3) && empty($output4)){
+    $message = $message . "Error: No output format selected. <br>";
+    $uploadOk = 0;
+}
 // Check if $uploadOk is set to 0. If so, indicate a general error at least
 if ($uploadOk == 0) {
     $message = $message . "Error: Your file was not uploaded. <br>";
-// If everything is ok, try to upload file
+// If everything is OK, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $_SESSION["target_dir"] . $_SESSION["unique_ID"] . '/' . $_SESSION["target_file"])) {
         $message = $message . "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded. <br>";
-        //echo "<form action='download.php' method='post'>
-        //    <input type='submit' name='submit' value='Download File' />
-        //</form>";
+        // Download file directly to browser without loading new page.
         header("Location: download.php");
     } else {
         // If a file was indeed selected to be uploaded and this error is still
@@ -73,22 +88,6 @@ if ($uploadOk == 0) {
 
 // end upload error checking, and validation
 
-// read in output formats
-$output2 = '';
-$output3 = '';
-$output4 = '';
-if (isset($_POST['HTML'])) {
-    $output2 = 'html';
-}
-if (isset($_POST['PDF'])) {
-    $output3 = 'pdf';
-}
-if (isset($_POST['DOCX'])) {
-    $output4 = 'docx';
-}
-if (!isset($_POST['HTML']) && !isset($_POST['PDF']) && !isset($_POST['DOCX'])){
-    $message = $message . "Error: No output format selected. <br>";
-}
 
 // Select a stylesheet to be applied.
 // Pandoc ignores stulesheets for PDF and DOCX formats natively. This is
@@ -107,7 +106,7 @@ if ($stylesheet == "avenir-white") {
 // Call convert.sh script where the actual conversion takes place.
 // Optins here are passed to convert.sh script and their purposes are detailed
 //  on the first few lines of convert.sh
-shell_exec("bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4 ");
+shell_exec("bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4");
 
 
 if ($message == ''){
