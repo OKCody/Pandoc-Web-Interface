@@ -1,0 +1,19 @@
+.uploadForm{
+  display: inline-block;
+  text-align: center;
+}
+
+.container{
+  padding: 100px;
+}
+
+input{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/*
+#title{
+  margin-top: 200px;
+}
+*/

@@ -109,9 +109,16 @@ if ($stylesheet == "avenir-white") {
 //  on the first few lines of convert.sh
 shell_exec("bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4 ");
 
-// When executed without error download file directly to index.php
-header("index.html");
 
-// Display accumulated error messages.
-echo $message;
+if ($message == ''){
+    // When executed without error download file directly to index.php
+    header("index.html");
+}
+else {
+    // Sandwich error message between top and bottom halves of error page.
+    echo file_get_contents( "errorHead.html" );
+    echo $message;    //Display accumulated error message.
+    echo file_get_contents( "errorTail.html" );
+}
+
 ?>
