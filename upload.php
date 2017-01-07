@@ -90,7 +90,7 @@ if ($uploadOk == 0) {
 
 
 // Select a stylesheet to be applied.
-// Pandoc ignores stulesheets for PDF and DOCX formats natively. This is
+// Pandoc ignores stylesheets for PDF and DOCX formats natively.
 //  This fact is exploited in Pandoc call in convert.sh
 $stylesheet = $_POST['stylesheet']; // empty string corresponds to "false"
 if ($stylesheet == "retro") {
@@ -108,10 +108,10 @@ if ($stylesheet == "avenir-white") {
 //  on the first few lines of convert.sh
 shell_exec("bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4");
 
-
 if ($message == ''){
     // When executed without error download file directly to index.php
-    header("index.html");
+    //header("index.html");
+    echo $stylesheet;
 }
 else {
     // Sandwich error message between top and bottom halves of error page.
