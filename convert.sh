@@ -2,7 +2,8 @@
 # $2 = path to selected stylesheet
 # $3 = html extension, lowercase because that's what's typically used for extensions
 # $4 = pdf extension
-# $5 = docx extension
+# $5 = epub3 extension
+# $6 = docx extension
 
 # Move into unique directory created for a given session
 cd $1
@@ -15,16 +16,43 @@ then
 fi
 
 # If an example stylesheet has been selected, remove all styleshees in favor of that which is selected.
-if [ $2 != "none" ]  # If something other than default state is selected, do this . . .
+echo $2 > text.txt
+echo "'"$(ls *.css)"'" >> text.txt
+if [ $2 == "none" ] && [ "$(ls *.css)" == "" ];
 then
+  echo "Not using example, no custom style provided" > text.txt                 # Working
+  example="0"
+  custom="0"
+  stylesheet=""
+fi
+if [ $2 == "none" ] && [ "$(ls *.css)" != "" ];
+then
+  echo "Not using example, custom style provided" > text.txt                    # Working
+  example="0"
+  custom="1"
+  stylesheet=$(ls *.css | head -1)
+fi
+if [ $2 != "none" ] && [ "$(ls *.css)" != "" ];
+then
+  echo "Using example, custom style provided" > text.txt                         # Working
+  example="1"
+  custom="1"
+  rm *.css    # Override provided stylesheet in favor of example stylesheet
+  cp ../../$2 stylesheet.css
+  stylesheet=$(ls *.css | head -1)
+fi
+if [ $2 != "none" ] && [ "$(ls *.css)" == "" ];  # If something other than default state is selected, do this . . .
+then
+  echo "Using Example, no custom style provided" > text.txt                     # Working
+  example="1"
+  custom="0"
   rm *.css    # If an example stylesheet has been selected, remove all uploaded stylesheets
   cp ../../$2 stylesheet.css
-else
   stylesheet=$(ls *.css | head -1)
 fi
 
 # Repeat conversion for each of the selected output formats passed in on variables $3 - $5.
-for output in $3 $4 $5
+for output in $3 $4 $5 $6
 do
   # Convert all .md files found in directory $1.
   # Apply only the first .css file returned by ls. Pandoc only allows 1 .css
@@ -34,25 +62,82 @@ do
   for filename in *.md
   do
     filename=$(echo $filename | cut -f 1 -d '.')
-    if [ $2 == "none" ];  # if a user supplies a custom stylesheet, apply it
+
+    # HTML conversion                                                           # Working 1/8/17 1:30pm
+    if [ $output == "html" ];
     then
-        stylesheet="-c $stylesheet"
-    else
-        if [ $(ls *.css | head -1) == "stylesheet.css" ];
+        if [ $example == "0" ] && [ $custom == "0" ];
         then
-            stylesheet="-c stylesheet.css"     # if a user has selected a provided stylesheet, apply it
-        else
-            stylesheet=""   # if a user has not provided or selected a stylesheet, apply no style
+            echo "HTML Not using example, no custom style provided" >> text.txt      # Working
+            stylesheet=""                                                            # Working
         fi
-    fi
-    if [ "$output" == "pdf" ];
-    then
+        if [ $example == "0" ] && [ $custom == "1" ];
+        then
+            echo "HTML Not using example, custom style provided" >> text.txt         # Working
+            stylesheet="-c $stylesheet"                                              # Working
+        fi
+        if [ $example == "1" ] && [ $custom == "0" ];
+        then
+            echo "HTML Using Example, no custom style provided" >> text.txt          # Working
+            stylesheet="-c $stylesheet"                                              # Working
+        fi
+        if [ $example == "1" ] && [ $custom == "1" ];
+        then
+            echo "HTML Using example, custom style provided" >> text.txt             # Working
+            stylesheet="-c $stylesheet"                                              # Working
+        fi
+        echo $stylesheet >> text.txt
         pandoc $filename.md -f markdown $stylesheet -o $filename.html
-        wkhtmltopdf --quiet --javascript-delay 1000 --user-style-sheet ../../print.css $filename.html $filename.pdf
-        rm $filename.html
-    else
-        pandoc $filename.md -f markdown -c $stylesheet -o $filename.$output
     fi
+    # end HTML conversion ---------------------
+
+    # PDF conversion                                                            #   Working 1/8/17 10:27pm
+    if [ $output == "pdf" ];
+    then
+        if [ $example == "0" ] && [ $custom == "0" ];
+        then
+            echo "PDF Not using example, no custom style provided" >> text.txt      # Working
+            stylesheet=""                                                           # Working
+        fi
+        if [ $example == "0" ] && [ $custom == "1" ];
+        then
+            echo "PDF Not using example, custom style provided" >> text.txt         # Working
+            stylesheet="-c $stylesheet"                                             # Working, problem with font. Maybe font needs to be embedded? test condition: skeleton.css
+        fi
+        if [ $example == "1" ] && [ $custom == "0" ];
+        then
+            echo "PDF Using Example, no custom style provided" >> text.txt          # Working
+            stylesheet="-c $stylesheet"                                             # Working
+        fi
+        if [ $example == "1" ] && [ $custom == "1" ];
+        then
+            echo "PDF Using example, custom style provided" >> text.txt             # Working
+            stylesheet="-c $stylesheet"                                             # Working
+        fi
+        echo $stylesheet >> text.txt
+        pandoc $filename.md -f markdown $stylesheet -o temp.html
+        wkhtmltopdf --quiet --javascript-delay 1000 --user-style-sheet ../../print.css temp.html $filename.pdf
+        rm temp.html
+    fi
+    # end HTML conversion ---------------------
+
+
+#    # EPUB Conversion
+#    if [ $2 == "none" ];  # if a user supplies a custom stylesheet, apply it
+#    then
+#        stylesheet='--epub-stylesheet $stylesheet'
+#    else
+#        if [ $(ls *.css | head -1) == "stylesheet.css" ];
+#        then
+#            stylesheet="--epub-stylesheet stylesheet.css"     # if a user has selected a provided stylesheet, apply it
+#        else
+#            stylesheet=""   # if a user has not provided or selected a stylesheet, apply no style
+#        fi
+#    fi
+#    if [ "$output" == "epub3" ];
+#    then
+#        pandoc $filename.md -f markdown $stylesheet -o temp.epub3
+#    fi
   done
 done
 

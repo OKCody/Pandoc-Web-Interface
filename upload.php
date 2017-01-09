@@ -54,16 +54,20 @@ if($imageFileType != "md" && $imageFileType != "MD" && $imageFileType != "txt"
 $output2 = '';
 $output3 = '';
 $output4 = '';
+$output5 = '';
 if (isset($_POST["HTML"])) {
     $output2 = 'html';
 }
 if (isset($_POST["PDF"])) {
     $output3 = 'pdf';
 }
-if (isset($_POST["DOCX"])) {
-    $output4 = 'docx';
+if (isset($_POST["EPUB"])) {
+    $output4 = 'epub3';
 }
-if (empty($output2) && empty($output3) && empty($output4)){
+if (isset($_POST["DOCX"])) {
+    $output5 = 'docx';
+}
+if (empty($output2) && empty($output3) && empty($output4) && empty($output5)){
     $message = $message . "Error: No output format selected. <br>";
     $uploadOk = 0;
 }
@@ -106,7 +110,7 @@ if ($stylesheet == "avenir-white") {
 // Call convert.sh script where the actual conversion takes place.
 // Optins here are passed to convert.sh script and their purposes are detailed
 //  on the first few lines of convert.sh
-shell_exec("bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4");
+shell_exec("bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4 $output5");
 
 if ($message == ''){
     // When executed without error download file directly to index.php
