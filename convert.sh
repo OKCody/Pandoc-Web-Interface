@@ -24,6 +24,7 @@ then
   example="0"
   custom="0"
   stylesheet=""
+  persistentStylesheet=$stylesheet
 fi
 if [ $2 == "none" ] && [ "$(ls *.css)" != "" ];
 then
@@ -31,6 +32,7 @@ then
   example="0"
   custom="1"
   stylesheet=$(ls *.css | head -1)
+  persistentStylesheet=$stylesheet
 fi
 if [ $2 != "none" ] && [ "$(ls *.css)" != "" ];
 then
@@ -40,6 +42,7 @@ then
   rm *.css    # Override provided stylesheet in favor of example stylesheet
   cp ../../$2 stylesheet.css
   stylesheet=$(ls *.css | head -1)
+  persistentStylesheet=$stylesheet
 fi
 if [ $2 != "none" ] && [ "$(ls *.css)" == "" ];  # If something other than default state is selected, do this . . .
 then
@@ -49,6 +52,7 @@ then
   rm *.css    # If an example stylesheet has been selected, remove all uploaded stylesheets
   cp ../../$2 stylesheet.css
   stylesheet=$(ls *.css | head -1)
+  persistentStylesheet=$stylesheet
 fi
 
 # Repeat conversion for each of the selected output formats passed in on variables $3 - $5.
@@ -64,6 +68,7 @@ do
     filename=$(echo $filename | cut -f 1 -d '.')
 
     # HTML conversion                                                           # Working 1/8/17 1:30pm
+    stylesheet=$persistentStylesheet
     if [ $output == "html" ];
     then
         if [ $example == "0" ] && [ $custom == "0" ];
@@ -92,6 +97,7 @@ do
     # end HTML conversion ---------------------
 
     # PDF conversion                                                            #   Working 1/8/17 10:27pm
+    stylesheet=$persistentStylesheet
     if [ $output == "pdf" ];
     then
         if [ $example == "0" ] && [ $custom == "0" ];
@@ -121,8 +127,8 @@ do
     fi
     # end HTML conversion ---------------------
 
-
     # EPUB conversion                                                            # Working 1/8/17 11:25pm
+    stylesheet=$persistentStylesheet
     if [ $output == "epub3" ];
     then
         if [ $example == "0" ] && [ $custom == "0" ];
@@ -156,9 +162,6 @@ do
         pandoc $filename.md -f markdown -o $filename.docx                        # Working
     fi
     # end EPUB conversion ---------------------
-
-
-
 
   done
 done
