@@ -87,7 +87,7 @@ do
             stylesheet="-c $stylesheet"                                              # Working
         fi
         echo $stylesheet >> text.txt
-        pandoc $filename.md -f markdown $stylesheet -o $filename.html
+        pandoc $filename.md -f markdown $stylesheet --mathjax -s -o $filename.html
     fi
     # end HTML conversion ---------------------
 
@@ -115,29 +115,51 @@ do
             stylesheet="-c $stylesheet"                                             # Working
         fi
         echo $stylesheet >> text.txt
-        pandoc $filename.md -f markdown $stylesheet -o temp.html
+        pandoc $filename.md -f markdown $stylesheet --mathjax -s -o temp.html
         wkhtmltopdf --quiet --javascript-delay 1000 --user-style-sheet ../../print.css temp.html $filename.pdf
         rm temp.html
     fi
     # end HTML conversion ---------------------
 
 
-#    # EPUB Conversion
-#    if [ $2 == "none" ];  # if a user supplies a custom stylesheet, apply it
-#    then
-#        stylesheet='--epub-stylesheet $stylesheet'
-#    else
-#        if [ $(ls *.css | head -1) == "stylesheet.css" ];
-#        then
-#            stylesheet="--epub-stylesheet stylesheet.css"     # if a user has selected a provided stylesheet, apply it
-#        else
-#            stylesheet=""   # if a user has not provided or selected a stylesheet, apply no style
-#        fi
-#    fi
-#    if [ "$output" == "epub3" ];
-#    then
-#        pandoc $filename.md -f markdown $stylesheet -o temp.epub3
-#    fi
+    # EPUB conversion                                                            # Working 1/8/17 11:25pm
+    if [ $output == "epub3" ];
+    then
+        if [ $example == "0" ] && [ $custom == "0" ];
+        then
+            echo "EPUB Not using example, no custom style provided" >> text.txt      # Working
+            stylesheet=""                                                            # Working
+        fi
+        if [ $example == "0" ] && [ $custom == "1" ];
+        then
+            echo "EPUB Not using example, custom style provided" >> text.txt         # Working
+            stylesheet="--epub-stylesheet $stylesheet"                               # Working
+        fi
+        if [ $example == "1" ] && [ $custom == "0" ];
+        then
+            echo "EPUB Using Example, no custom style provided" >> text.txt          # Working
+            stylesheet="--epub-stylesheet $stylesheet"                               # Working
+        fi
+        if [ $example == "1" ] && [ $custom == "1" ];
+        then
+            echo "EPUB Using example, custom style provided" >> text.txt             # Working
+            stylesheet="--epub-stylesheet $stylesheet"                               # Working
+        fi
+        echo $stylesheet >> text.txt
+        pandoc $filename.md -f markdown -t epub3 $stylesheet -o $filename.epub
+    fi
+    # end EPUB conversion ---------------------
+
+    # DOCX conversion                                                            # Working 1/8/17 11:38pm
+    if [ $output == "docx" ];
+    then
+        pandoc $filename.md -f markdown -o $filename.docx                        # Working
+    fi
+    # end EPUB conversion ---------------------
+
+
+
+
   done
 done
 
