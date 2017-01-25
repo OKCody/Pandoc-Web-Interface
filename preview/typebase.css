@@ -1,0 +1,93 @@
+/*! Typebase.less v0.1.0 | MIT License */
+/* Setup */
+.typebase {
+  /* Change default typefaces here */
+  font-family: sans-serif;
+  font-size: 137.5%;
+  -webkit-font-smoothing: antialiased;
+}
+/* Copy & Lists */
+.typebase p {
+  line-height: 2.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+}
+.typebase ul,
+.typebase ol {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.typebase ul li,
+.typebase ol li {
+  line-height: 1.5rem;
+}
+.typebase ul ul,
+.typebase ol ul,
+.typebase ul ol,
+.typebase ol ol {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.typebase blockquote {
+  line-height: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+/* Headings */
+.typebase h1,
+.typebase h2,
+.typebase h3,
+.typebase h4,
+.typebase h5,
+.typebase h6 {
+  /* Change heading typefaces here */
+  font-family: sans-serif;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+  line-height: 1.5rem;
+}
+.typebase h1 {
+  font-size: 4.242rem;
+  line-height: 4.5rem;
+  margin-top: 3rem;
+}
+.typebase h2 {
+  font-size: 2.828rem;
+  line-height: 3rem;
+  margin-top: 3rem;
+}
+.typebase h3 {
+  font-size: 1.414rem;
+}
+.typebase h4 {
+  font-size: 0.707rem;
+}
+.typebase h5 {
+  font-size: 0.4713333333333333rem;
+}
+.typebase h6 {
+  font-size: 0.3535rem;
+}
+/* Tables */
+.typebase table {
+  margin-top: 1.5rem;
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+.typebase table td,
+.typebase table th {
+  padding: 0;
+  line-height: 33px;
+}
+/* Code blocks */
+.typebase code {
+  vertical-align: bottom;
+}
+/* Leading paragraph text */
+.typebase .lead {
+  font-size: 1.414rem;
+}
+/* Hug the block above you */
+.typebase .hug {
+  margin-top: 0;
+}

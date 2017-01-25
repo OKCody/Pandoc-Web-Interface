@@ -4,7 +4,7 @@
 <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Skeleton: Responsive CSS Boilerplate</title>
+  <title>Pandoc Web Interface</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -16,12 +16,43 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
 
-  <!-- CSS
+  <!-- Page CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" type="text/css" href="normalize.css">
   <link rel="stylesheet" type="text/css" href="skeleton.css">
   <link rel="stylesheet" type="text/css" href="custom.css">
-  <link rel="stylesheet" type="text/css" href="example.css">
+
+  <!-- Preview CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" type="text/css" href="preview/ieee.css">
+  <link rel="stylesheet" type="text/css" href="preview/acm.css">
+  <link rel="stylesheet" type="text/css" href="preview/typebase.css">
+  <link rel="stylesheet" type="text/css" href="preview/getaway.css">
+
+  <!-- Preview Javascript (changes the style of the "preview document" based on radio buttons)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script>
+  function ieee(){
+    document.getElementById('preview').classList=""; /*Removes all active CSS classes*/
+    document.getElementById('preview').classList.add("ieee"); /*Applies all .ieee classes*/
+  }
+  function acm(){
+    document.getElementById('preview').classList="";
+    document.getElementById('preview').classList.add("acm");
+  }
+  function typebase(){
+    document.getElementById('preview').classList="";
+    document.getElementById('preview').classList.add("typebase");
+  }
+  function getaway(){
+    document.getElementById('preview').classList="";
+    document.getElementById('preview').classList.add("getaway");
+  }
+  </script>
+
+  <!-- MathJax Include, of course. -for prefiew
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 </head>
 <body>
@@ -50,15 +81,49 @@
       <div class="row">
         <div class="twelve columns uploadForm">
           <b>Stylesheet: </b>
-           <input type="radio" name="stylesheet" value="none" checked="checked">none</input>
-           <input type="radio" name="stylesheet" value="retro">retro.css</input>
-           <input type="radio" name="stylesheet" value="screen">screen.css</input>
-          <input type="radio" name="stylesheet" value="avenir-white">avenir-white.css</input>
+           <!--"Custom" selection should indeed invoke a vanilla stylesheet for
+                 preview. -one that matches Pandoc's default formatting-->
+           <input type="radio" name="stylesheet" value="custom" checked="checked" onclick="custom();">Custom</input>
+           <input type="radio" name="stylesheet" value="IEEE" onclick="ieee();">IEEE.css</input>
+           <input type="radio" name="stylesheet" value="ACM" onclick="acm();">ACM.css</input>
+           <input type="radio" name="stylesheet" value="Typebase" onclick="typebase();">Typebase.css</input>
+          <input type="radio" name="stylesheet" value="Getaway" onclick="getaway();">Getaway.css</input>
         </div>
       </div>
       <div class="row">
         <div class="twelve columns uploadForm">
           <input type="submit" value="Convert" name="submit"></input>
+        </div>
+      </div>
+      <div class="row">
+        <h1>Preview</h1>
+        <div id="preview" class="twelve columns">
+          <h1 id="this-is-a-heading">This is a heading</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p><span class="math display">\[\int 1 = x + C\]</span> <span class="math display">\[\int x = \frac{x^2}{2} + C\]</span> <span class="math display">\[\int x^2 = \frac{x^3}{3} + C\]</span></p>
+          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <pre><code>for filename in *
+          do
+          echo $filename &gt;&gt; files.txt
+          done</code></pre>
+          <h2 id="this-is-a-subheading">This is a subheading</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <ul>
+          <li>Item one</li>
+          <li>Item two</li>
+          <li>Item three</li>
+          </ul>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <blockquote>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </blockquote>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <div class="footnotes">
+          <hr />
+          <ol>
+          <li id="fn1"><p>This is a footnote.<a href="#fnref1">↩</a></p></li>
+          </ol>
+          </div>
         </div>
       </div>
     </div>

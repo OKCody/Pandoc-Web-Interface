@@ -12,8 +12,9 @@ input{
   margin-right: 10px;
 }
 
-/*
-#title{
-  margin-top: 200px;
+#preview{
+  border: 1px solid #E1E1E1;
+  border-radius: 4px;
+  margin: -20px;
+  padding: 20px;
 }
-*/

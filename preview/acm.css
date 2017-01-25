@@ -1,0 +1,522 @@
+@page {
+  size: 8.5in 11in;
+  margin: 0.75in 0.75in 1in 0.75in;
+
+  @footnotes {
+    columns: 2;
+    margin-top: 2em;
+    border-top: 0.5px solid #000000;
+    padding-top: 1em;
+  }
+}
+.acm body {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+  -webkit-column-gap: balance;
+  -moz-column-gap: balance;
+  column-gap: balance;
+  -webkit-column-gap: 0.33in;
+  -moz-column-gap: 0.33in;
+  column-gap: 0.33in;
+}
+.acm .footnote {
+  float: prince-column-footnote;
+}
+.acm caption {
+  caption-side: top;
+}
+.acm {
+  font-size: 9pt;
+}
+.acm {
+  font-family: "Times New Roman", Times, serif;
+  text-align: justify;
+  hyphens: auto;
+}
+.acm h1,
+.acm h2,
+.acm h3,
+.acm h4,
+.acm h5,
+.acm h6 {
+  -webkit-column-break-after: avoid;
+  column-break-after: avoid;
+  break-after: avoid;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  hyphens: none;
+}
+.acm h1:not(.counter-skip):before,
+.acm h2:not(.counter-skip):before,
+.acm h3:not(.counter-skip):before,
+.acm h4:not(.counter-skip):before,
+.acm h5:not(.counter-skip):before,
+.acm h6:not(.counter-skip):before {
+  margin-right: 0.5em;
+}
+.acm h1 {
+  font-size: 1.33333333em;
+}
+.acm h2 {
+  font-size: 1.33333333em;
+}
+.acm h3 {
+  font-size: 1.22222222em;
+}
+.acm h4 {
+  font-size: 1.22222222em;
+}
+.acm h5 {
+  font-size: 1.22222222em;
+}
+.acm h6 {
+  font-size: 1.22222222em;
+}
+.acm p {
+  margin: 0 0 0.5em;
+  line-height: 1.17;
+  text-indent: 0;
+}
+.acm small {
+  font-size: 0.77777778em;
+}
+.acm code {
+  font-family: Courier, monospace;
+  font-size: 0.88888889em;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.acm q:before {
+  content: "“";
+}
+.acm q:after {
+  content: "”";
+}
+.acm q > q:before {
+  content: "‘";
+}
+.acm q > q:after {
+  content: "’";
+}
+.acm table {
+  width: 100%;
+  margin: 1.667em 0 1em;
+  border-collapse: collapse;
+}
+.acm th,
+.acm td {
+  padding: 0.333em;
+  border: 0.5px solid #000000;
+  text-align: center;
+}
+.acm caption {
+  margin: 0 0 4pt;
+  font-weight: bold;
+}
+.acm figure {
+  margin: 1.333em 0 2.333em;
+  text-align: center;
+}
+.acm figcaption {
+  font-weight: bold;
+}
+.acm .footnote {
+  margin-left: 0.333em;
+  padding-left: 0.667em;
+}
+.acm .footnote::footnote-call {
+  vertical-align: super;
+  line-height: none;
+  font-size: 66%;
+}
+.acm .footnote::footnote-marker {
+  font-size: 66%;
+  footnote-style-position: inside;
+}
+.acm cite {
+  display: block;
+  position: relative;
+  margin-left: 2.5em;
+  -webkit-column-break-inside: avoid;
+  column-break-inside: avoid;
+  break-inside: avoid;
+  font-style: normal;
+  text-align: left;
+}
+.acm cite:before {
+  position: absolute;
+  display: inline-block;
+  margin-left: -2.5em;
+}
+.acm cite a {
+  text-decoration: none;
+}
+.acm a[href^="#"] {
+  color: inherit;
+  text-decoration: none;
+}
+@page {
+
+}
+.acm body > :first-child {
+  counter-reset: page 1;
+}
+.acm h1:not(.counter-skip) {
+  counter-increment: section;
+}
+.acm h2:not(.counter-skip) {
+  counter-increment: subsection;
+}
+.acm h3:not(.counter-skip) {
+  counter-increment: subsubsection;
+}
+.acm h4:not(.counter-skip) {
+  counter-increment: subsubsection;
+}
+.acm h5:not(.counter-skip) {
+  counter-increment: subsubsubsection;
+}
+.acm h6:not(.counter-skip) {
+  counter-increment: subsubsubsubsection;
+}
+.acm h1.counter-reset {
+  counter-reset: section;
+}
+.acm h2.counter-reset {
+  counter-reset: subsection;
+}
+.acm h3.counter-reset {
+  counter-reset: subsubsection;
+}
+.acm h4.counter-reset {
+  counter-reset: subsubsection;
+}
+.acm h5.counter-reset {
+  counter-reset: subsubsubsection;
+}
+.acm h6.counter-reset {
+  counter-reset: subsubsubsubsection;
+}
+.acm h1:not(.counter-skip):before {
+  content: ""  counter(section, decimal) "";
+}
+.acm h2:not(.counter-skip):before {
+  content: ""  counter(section, decimal) '.' counter(subsection, decimal) "";
+}
+.acm h3:not(.counter-skip):before {
+  content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) "";
+}
+.acm h4:not(.counter-skip):before {
+  content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsection, decimal) "";
+}
+.acm h5:not(.counter-skip):before {
+  content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsubsection, decimal) "";
+}
+.acm h6:not(.counter-skip):before {
+  content: ""  counter(section, decimal) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsection, decimal) '.' counter(subsubsubsection, decimal) '.' counter(subsubsubsubsection, decimal) "";
+}
+.acm table {
+  counter-increment: table;
+}
+.acm caption:before {
+  content: "Table " counter(table) ". ";
+}
+.acm figure {
+  counter-increment: figure;
+}
+.acm figcaption:before {
+  content: "Figure " counter(figure) ". ";
+}
+.acm .footnote {
+  counter-increment: footnote;
+}
+.acm .footnote::footnote-call {
+  content: counter(footnote);
+}
+.acm .footnote::footnote-marker {
+  content: counter(footnote);
+}
+.acm a[href^="#"] {
+  content: target-counter(attr(href, url), reference);
+}
+.acm a[href^="#"]:before {
+  content: "[";
+}
+.acm a[href^="#"]:after {
+  content: "]";
+}
+.acm a[href^="#"].section {
+  content: target-counter(attr(href, url), section);
+}
+.acm a[href^="#"].section:before {
+  content: "";
+}
+.acm a[href^="#"].section:after {
+  content: "";
+}
+.acm a[href^="#"].subsection {
+  content: target-counter(attr(href, url), section) "." target-counter(attr(href, url), subsection);
+}
+.acm a[href^="#"].subsection:before {
+  content: "";
+}
+.acm a[href^="#"].subsection:after {
+  content: "";
+}
+.acm a[href^="#"].subsubsection {
+  content: target-counter(attr(href, url), section) "." target-counter(attr(href, url), subsection) "." target-counter(attr(href, url), subsubsection);
+}
+.acm a[href^="#"].subsubsection:before {
+  content: "";
+}
+.acm a[href^="#"].subsubsection:after {
+  content: "";
+}
+.acm a[href^="#"].subsubsubsection {
+  content: target-counter(attr(href, url), section) "." target-counter(attr(href, url), subsection) "." target-counter(attr(href, url), subsubsection) "." target-counter(attr(href, url), subsubsubsection);
+}
+.acm a[href^="#"].subsubsubsection:before {
+  content: "";
+}
+.acm a[href^="#"].subsubsubsection:after {
+  content: "";
+}
+.acm a[href^="#"].figure {
+  content: target-counter(attr(href, url), figure);
+}
+.acm a[href^="#"].figure:before {
+  content: "Figure ";
+}
+.acm a[href^="#"].figure:after {
+  content: "";
+}
+.acm a[href^="#"].table {
+  content: target-counter(attr(href, url), table);
+}
+.acm a[href^="#"].table:before {
+  content: "Table ";
+}
+.acm a[href^="#"].table:after {
+  content: "";
+}
+.acm .cites > :not(:first-child):before {
+  content: none;
+}
+.acm .cites > :not(:last-child):after {
+  content: ", ";
+}
+.acm cite {
+  counter-increment: reference;
+}
+.acm cite:before {
+  content: "[" counter(reference) "]";
+}
+.acm .col-1 {
+  -webkit-column-count: 1;
+  -moz-column-count: 1;
+  column-count: 1;
+}
+.acm .col-2 {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+}
+.acm .col-3 {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+}
+.acm .col-4 {
+  -webkit-column-count: 4;
+  -moz-column-count: 4;
+  column-count: 4;
+}
+.acm .col-span {
+  -webkit-column-span: all;
+  -moz-column-span: all;
+  column-span: all;
+}
+.acm .page-break-after {
+  -webkit-column-break-after: always;
+  column-break-after: always;
+  break-after: always;
+}
+.acm .page-break-before {
+  -webkit-column-break-after: always;
+  column-break-after: always;
+  break-after: always;
+}
+.acm .col-break-after {
+  -webkit-column-break-after: always;
+  column-break-after: always;
+  break-after: always;
+}
+.acm .col-break-before {
+  -webkit-column-break-after: always;
+  column-break-after: always;
+  break-after: always;
+}
+.acm .counter-skip h1:before,
+.acm .counter-skip h2:before,
+.acm .counter-skip h3:before,
+.acm .counter-skip h4:before,
+.acm .counter-skip h5:before,
+.acm .counter-skip h6:before,
+.acm .counter-skip:before {
+  margin-right: 0 !important;
+  content: "" !important;
+}
+.acm h1,
+.acm h2 {
+  margin: 1.33333333em 0 0 0;
+}
+.acm h1 {
+  text-transform: uppercase;
+}
+.acm h1:not(.counter-skip):before {
+  content: "" counter(section) ".";
+}
+.acm h1 + h2,
+.acm h1 + * > h2:first-child {
+  margin-top: 0;
+}
+.acm h3,
+.acm h4 {
+  margin: 1.33333333em 0 0 0;
+  font-style: italic;
+  font-weight: normal;
+}
+.acm header {
+  column-span: all;
+  margin-bottom: 4em;
+  font-family: Helvetica, sans-serif;
+}
+.acm header h2 {
+  margin: 2em 0;
+  font-size: 1.333em;
+  font-weight: normal;
+  text-align: center;
+}
+.acm .title {
+  margin: 0 0 0.333em;
+  font-family: Helvetica, sans-serif;
+  font-size: 18pt;
+  text-align: center;
+  text-transform: none;
+  -webkit-column-span: all;
+  -moz-column-span: all;
+  column-span: all;
+}
+.acm .authors {
+  -webkit-column-gap: 0;
+  -moz-column-gap: 0;
+  column-gap: 0;
+}
+.acm .authors + .authors {
+  margin-top: 6pt;
+}
+.acm .author {
+  -webkit-column-break-inside: avoid;
+  column-break-inside: avoid;
+  break-inside: avoid;
+  -webkit-column-break-after: always;
+  column-break-after: always;
+  break-after: always;
+  text-align: center;
+  font-size: 10pt;
+}
+.acm .author a {
+  color: inherit;
+  text-decoration: none;
+}
+.acm .author > :first-child,
+.acm .author > :last-child {
+  font-size: 12pt;
+}
+.acm .copyright {
+  height: 1.5in;
+  float: column-bottom;
+  font-size: 8pt;
+}
+.acm .copyright > * {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 3.333in;
+}
+.acm cite {
+  margin-bottom: 0.333em;
+  text-align: left;
+}
+.acm cite a {
+  text-decoration: none;
+}
+.acm .appendix {
+  counter-reset: section;
+}
+.acm .appendix h1:not(.counter-skip):before {
+  content: "" counter(section, upper-alpha) "";
+}
+.acm .appendix h2:not(.counter-skip):before {
+  content: "" counter(section, upper-alpha) '.' counter(subsection, decimal) "";
+}
+.acm .appendix h3:not(.counter-skip):before {
+  content: "" counter(section, upper-alpha) '.' counter(subsection, decimal) '.' counter(subsubsection, decimal) "";
+}
+.acm .equation {
+  margin: 3pt 0;
+  text-align: center;
+}
+.acm .equation:not(.displaymath) {
+  position: relative;
+  counter-increment: equation;
+}
+.acm .equation:not(.displaymath):after {
+  content: "(" counter(equation) ")";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  bottom: 50%;
+  line-height: 0;
+}
+.acm .theorem,
+.acm .proof,
+.acm .definition {
+  margin: 12pt 0;
+}
+.acm .theorem:before,
+.acm .proof:before,
+.acm .definition:before {
+  margin-left: 9pt;
+}
+.acm .theorem {
+  font-style: italic;
+}
+.acm .theorem:before {
+  counter-increment: theorem;
+  content: "Theorem " counter(theorem) ". ";
+  font-style: normal;
+  font-variant: small-caps;
+}
+.acm .proof:before {
+  counter-increment: proof;
+  content: "Proof " counter(proof) ". ";
+  font-style: normal;
+  font-variant: small-caps;
+}
+.acm .definition:before {
+  counter-increment: definition;
+  content: "Definition " counter(definition) ". ";
+  font-style: italic;
+}
+@media screen {
+  .authors {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+  }
+  .copyright {
+    display: none;
+  }
+}

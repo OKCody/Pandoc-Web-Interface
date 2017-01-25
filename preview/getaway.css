@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Six Caps';
+    src: url(https://fonts.googleapis.com/css?family=Six+Caps:400' rel='stylesheet' type='text/css);
+}
+@font-face {
+    font-family: 'Merriweather';
+    src: url(https://fonts.googleapis.com/css?family=Merriweather:400,400italic,900' rel='stylesheet' type='text/css' rel='stylesheet' type='text/css);
+}
+
+.getaway h1 {
+	color: #67BE9B;
+	font-family: 'Six Caps';
+	font-size: 50px;
+	font-weight: 400;
+	line-height: 50px;
+	letter-spacing: 10px;
+	margin-bottom: 20px;
+	text-indent: 0px;
+	text-transform: uppercase;
+}
+
+.getaway p {
+	color: #54534F;
+	font-family: 'Merriweather';
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 24px;
+	margin-bottom: 12px;
+}
+
+.getaway a {
+	color: #D8B445;	border-bottom: 2px solid #D8B445;
+	font-style: italic;
+	text-decoration: none;
+}
+
+.getaway a:hover {
+	color: #54534F;
+}

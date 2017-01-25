@@ -97,14 +97,20 @@ if ($uploadOk == 0) {
 // Pandoc ignores stylesheets for PDF and DOCX formats natively.
 //  This fact is exploited in Pandoc call in convert.sh
 $stylesheet = $_POST['stylesheet']; // empty string corresponds to "false"
-if ($stylesheet == "retro") {
-    $stylesheet = 'stylesheets/retro.css';
+if ($stylesheet == "custom") {
+    $stylesheet = 'custom';
 }
-if ($stylesheet == "screen") {
-    $stylesheet = 'stylesheets/screen.css';
+if ($stylesheet == "IEEE") {
+    $stylesheet = 'stylesheets/ieee.css';
 }
-if ($stylesheet == "avenir-white") {
-    $stylesheet = 'stylesheets/avenir-white.css';
+if ($stylesheet == "ACM") {
+    $stylesheet = 'stylesheets/acm.css';
+}
+if ($stylesheet == "Typebase") {
+    $stylesheet = 'stylesheets/Typebase.css';
+}
+if ($stylesheet == "Getaway") {
+    $stylesheet = 'stylesheets/Getaway.css';
 }
 
 // Call convert.sh script where the actual conversion takes place.

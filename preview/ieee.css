@@ -1,0 +1,530 @@
+
+@page {
+  size: 8.5in 11in;
+  margin: 0.75in 0.62in 1in 0.62in;
+
+  @footnotes {
+    columns: 2;
+    margin-top: 1em;
+    border-top: 0.5px solid #000000;
+    padding-top: 3pt;
+  }
+}
+.ieee body {
+  -webkit-column-count: 1;
+  -moz-column-count: 2;
+  column-count: 1;
+  -webkit-column-gap: balance;
+  -moz-column-gap: balance;
+  column-gap: balance;
+  -webkit-column-gap: 0.33in;
+  -moz-column-gap: 0.33in;
+  column-gap: 0.33in;
+}
+.ieee .footnote {
+  float: prince-column-footnote;
+}
+.ieee caption {
+  caption-side: top;
+}
+.ieee {
+  font-size: 10pt;
+}
+.ieee {
+  font-family: "Times New Roman", Times, serif;
+  text-align: justify;
+  hyphens: none;
+}
+.ieee h1,
+.ieee h2,
+.ieee h3,
+.ieee h4,
+.ieee h5,
+.ieee h6 {
+  -webkit-column-break-after: avoid;
+  column-break-after: avoid;
+  break-after: avoid;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  hyphens: none;
+}
+.ieee h1:not(.counter-skip):before,
+.ieee h2:not(.counter-skip):before,
+.ieee h3:not(.counter-skip):before,
+.ieee h4:not(.counter-skip):before,
+.ieee h5:not(.counter-skip):before,
+.ieee h6:not(.counter-skip):before {
+  margin-right: 0.5em;
+}
+.ieee h1 {
+  font-size: 10pt;
+}
+.ieee h2 {
+  font-size: 10pt;
+}
+.ieee h3 {
+  font-size: 10pt;
+}
+.ieee h4 {
+  font-size: 10pt;
+}
+.ieee h5 {
+  font-size: 10pt;
+}
+.ieee h6 {
+  font-size: 10pt;
+}
+.ieee p {
+  margin: 0 0 0.5em;
+  line-height: 1.1;
+  text-indent: 1.5em;
+}
+.ieee small {
+  font-size: 8pt;
+}
+.ieee code {
+  font-family: Courier, monospace;
+  font-size: 8pt;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.ieee q:before {
+  content: "“";
+}
+.ieee q:after {
+  content: "”";
+}
+.ieee q > q:before {
+  content: "‘";
+}
+.ieee q > q:after {
+  content: "’";
+}
+.ieee table {
+  width: 100%;
+  margin: 1.667em 0 1em;
+  border-collapse: collapse;
+}
+.ieee th,
+.ieee td {
+  padding: 0.333em;
+  border: 0.5px solid #000000;
+  text-align: center;
+}
+.ieee caption {
+  margin: 0 0 4pt;
+  font-weight: bold;
+}
+.ieee figure {
+  margin: 1.333em 0 2.333em;
+  text-align: center;
+}
+.ieee figcaption {
+  font-weight: bold;
+}
+.ieee .footnote {
+  margin-left: 0.333em;
+  padding-left: 0.667em;
+}
+.ieee .footnote::footnote-call {
+  vertical-align: super;
+  line-height: none;
+  font-size: 66%;
+}
+.ieee .footnote::footnote-marker {
+  font-size: 66%;
+  footnote-style-position: inside;
+}
+.ieee cite {
+  display: block;
+  position: relative;
+  margin-left: 2.5em;
+  -webkit-column-break-inside: avoid;
+  column-break-inside: avoid;
+  break-inside: avoid;
+  font-style: normal;
+  text-align: left;
+}
+.ieee cite:before {
+  position: absolute;
+  display: inline-block;
+  margin-left: -2.5em;
+}
+.ieee cite a {
+  text-decoration: none;
+}
+.ieee a[href^="#"] {
+  color: inherit;
+  text-decoration: none;
+}
+@page {
+
+}
+.ieee body > :first-child {
+  counter-reset: page 1;
+}
+.ieee h1:not(.counter-skip) {
+  counter-increment: section;
+}
+.ieee h2:not(.counter-skip) {
+  counter-increment: subsection;
+}
+.ieee h3:not(.counter-skip) {
+  counter-increment: subsubsection;
+}
+.ieee h4:not(.counter-skip) {
+  counter-increment: subsubsection;
+}
+.ieee h5:not(.counter-skip) {
+  counter-increment: subsubsubsection;
+}
+.ieee h6:not(.counter-skip) {
+  counter-increment: subsubsubsubsection;
+}
+.ieee h1.counter-reset {
+  counter-reset: section;
+}
+.ieee h2.counter-reset {
+  counter-reset: subsection;
+}
+.ieee h3.counter-reset {
+  counter-reset: subsubsection;
+}
+.ieee h4.counter-reset {
+  counter-reset: subsubsection;
+}
+.ieee h5.counter-reset {
+  counter-reset: subsubsubsection;
+}
+.ieee h6.counter-reset {
+  counter-reset: subsubsubsubsection;
+}
+.ieee h1:not(.counter-skip):before {
+  content: ""  counter(section, upper-roman) ".";
+}
+.ieee h2:not(.counter-skip):before {
+  content: ""  counter(section, upper-roman) '.' counter(subsection, upper-alpha) ".";
+}
+.ieee h3:not(.counter-skip):before {
+  content: ""  counter(section, upper-roman) '.' counter(subsection, upper-alpha) '.' counter(subsubsection, decimal) ".";
+}
+.ieee h4:not(.counter-skip):before {
+  content: ""  counter(section, upper-roman) '.' counter(subsection, upper-alpha) '.' counter(subsubsection, decimal) '.' counter(subsubsection, lower-alpha) ".";
+}
+.ieee h5:not(.counter-skip):before {
+  content: ""  counter(section, upper-roman) '.' counter(subsection, upper-alpha) '.' counter(subsubsection, decimal) '.' counter(subsubsection, lower-alpha) '.' counter(subsubsubsection, upper-roman) ".";
+}
+.ieee h6:not(.counter-skip):before {
+  content: ""  counter(section, upper-roman) '.' counter(subsection, upper-alpha) '.' counter(subsubsection, decimal) '.' counter(subsubsection, lower-alpha) '.' counter(subsubsubsection, upper-roman) '.' counter(subsubsubsubsection, upper-roman) ".";
+}
+.ieee table {
+  counter-increment: table;
+}
+.ieee caption:before {
+  content: "Table " counter(table) ". ";
+}
+.ieee figure {
+  counter-increment: figure;
+}
+.ieee figcaption:before {
+  content: "Fig. " counter(figure) ". ";
+}
+.ieee .footnote {
+  counter-increment: footnote;
+}
+.ieee .footnote::footnote-call {
+  content: counter(footnote);
+}
+.ieee .footnote::footnote-marker {
+  content: counter(footnote);
+}
+.ieee a[href^="#"] {
+  content: target-counter(attr(href, url), reference);
+}
+.ieee a[href^="#"]:before {
+  content: "[";
+}
+.ieee a[href^="#"]:after {
+  content: "]";
+}
+.ieee a[href^="#"].section {
+  content: target-counter(attr(href, url), section);
+}
+.ieee a[href^="#"].section:before {
+  content: "";
+}
+.ieee a[href^="#"].section:after {
+  content: "";
+}
+.ieee a[href^="#"].subsection {
+  content: target-counter(attr(href, url), section) "." target-counter(attr(href, url), subsection);
+}
+.ieee a[href^="#"].subsection:before {
+  content: "";
+}
+.ieee a[href^="#"].subsection:after {
+  content: "";
+}
+.ieee a[href^="#"].subsubsection {
+  content: target-counter(attr(href, url), section) "." target-counter(attr(href, url), subsection) "." target-counter(attr(href, url), subsubsection);
+}
+.ieee a[href^="#"].subsubsection:before {
+  content: "";
+}
+.ieee a[href^="#"].subsubsection:after {
+  content: "";
+}
+.ieee a[href^="#"].subsubsubsection {
+  content: target-counter(attr(href, url), section) "." target-counter(attr(href, url), subsection) "." target-counter(attr(href, url), subsubsection) "." target-counter(attr(href, url), subsubsubsection);
+}
+.ieee a[href^="#"].subsubsubsection:before {
+  content: "";
+}
+.ieee a[href^="#"].subsubsubsection:after {
+  content: "";
+}
+.ieee a[href^="#"].figure {
+  content: target-counter(attr(href, url), figure);
+}
+.ieee a[href^="#"].figure:before {
+  content: "Fig. ";
+}
+.ieee a[href^="#"].figure:after {
+  content: "";
+}
+.ieee a[href^="#"].table {
+  content: target-counter(attr(href, url), table);
+}
+.ieee a[href^="#"].table:before {
+  content: "Table ";
+}
+.ieee a[href^="#"].table:after {
+  content: "";
+}
+.ieee .cites > :not(:first-child):before {
+  content: none;
+}
+.ieee .cites > :not(:last-child):after {
+  content: ", ";
+}
+.ieee cite {
+  counter-increment: reference;
+}
+.ieee cite:before {
+  content: "[" counter(reference) "]";
+}
+.ieee .col-1 {
+  -webkit-column-count: 1;
+  -moz-column-count: 1;
+  column-count: 1;
+}
+.ieee .col-2 {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+}
+.ieee .col-3 {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+}
+.ieee .col-4 {
+  -webkit-column-count: 4;
+  -moz-column-count: 4;
+  column-count: 4;
+}
+.ieee .col-span {
+  -webkit-column-span: all;
+  -moz-column-span: all;
+  column-span: all;
+}
+.ieee .page-break-after {
+  -webkit-column-break-after: always;
+  column-break-after: always;
+  break-after: always;
+}
+.ieee .page-break-before {
+  -webkit-column-break-after: always;
+  column-break-after: always;
+  break-after: always;
+}
+.ieee .col-break-after {
+  -webkit-column-break-after: always;
+  column-break-after: always;
+  break-after: always;
+}
+.ieee .col-break-before {
+  -webkit-column-break-after: always;
+  column-break-after: always;
+  break-after: always;
+}
+.ieee .counter-skip h1:before,
+.ieee .counter-skip h2:before,
+.ieee .counter-skip h3:before,
+.ieee .counter-skip h4:before,
+.ieee .counter-skip h5:before,
+.ieee .counter-skip h6:before,
+.ieee .counter-skip:before {
+  margin-right: 0 !important;
+  content: "" !important;
+}
+.ieee .abstract {
+  font-size: 9pt;
+  font-weight: bold;
+}
+.ieee .abstract p {
+  margin-bottom: 12pt;
+}
+.ieee h1,
+.ieee h2,
+.ieee h3,
+.ieee h4,
+.ieee h5,
+.ieee h6 {
+  font-weight: normal;
+}
+.ieee h1,
+.ieee h5 {
+  margin-bottom: 4pt;
+  font-variant: small-caps;
+  text-align: center;
+}
+.ieee h3 {
+  text-indent: 1.5em;
+}
+.ieee h4 {
+  text-indent: 2.25em;
+}
+.ieee h2 {
+  margin-bottom: 2pt;
+  font-style: italic;
+}
+.ieee h3,
+.ieee h4,
+.ieee h5 {
+  page-break-after: auto;
+}
+.ieee h2:not(.counter-skip):before {
+  content: "" counter(subsection, upper-alpha) ".";
+}
+.ieee h5:not(.counter-skip):before {
+  content: none;
+}
+.ieee h1 + h2,
+.ieee h1 + * > h2:first-child {
+  margin-top: 10pt;
+}
+.ieee h3,
+.ieee h4 {
+  margin: 10pt 0 0 0;
+  font-style: italic;
+}
+.ieee ul {
+  margin-left: 2.5em;
+}
+.ieee li {
+  margin-bottom: 6pt;
+}
+.ieee ol {
+  list-style: none;
+  counter-reset: ol;
+  margin-left: 0;
+  text-indent: 1.5em;
+}
+.ieee ol > li:before {
+  counter-increment: ol;
+  content: counter(ol, decimal) ") ";
+  font-style: italic;
+}
+.ieee ol ol {
+  text-indent: 3em;
+}
+.ieee ol ol > li:before {
+  counter-increment: ol;
+  content: counter(ol, lower-alpha) ") ";
+}
+.ieee .title {
+  margin-bottom: 5pt;
+  font-size: 24pt;
+  font-variant: normal;
+}
+.ieee .subtitle {
+  margin-top: 0;
+  margin-bottom: 35pt;
+  font-size: 14pt;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+}
+.ieee header {
+  column-span: all;
+  margin-bottom: 22pt;
+}
+.ieee table {
+  font-size: 8pt;
+}
+.ieee caption,
+.ieee figcaption {
+  font-size: 8pt;
+  font-weight: normal;
+}
+.ieee caption {
+  font-variant: small-caps;
+}
+.ieee figcaption {
+  text-align: left;
+}
+.ieee .footnote {
+  font-size: 8pt;
+}
+.ieee .footnote {
+  margin-bottom: -0.38in;
+  font-size: 8pt;
+  font-weight: normal;
+}
+.ieee .footnote::footnote-call,
+.ieee .footnote::footnote-marker {
+  display: none;
+  content: none;
+}
+.ieee .authors {
+  column-gap: 0;
+}
+.ieee .authors + .authors {
+  margin-top: 6pt;
+}
+.ieee .author {
+  break-inside: avoid;
+  column-break-after: always;
+  text-align: center;
+}
+.ieee .author > :first-child {
+  font-size: 11pt;
+}
+.ieee .equation {
+  margin: 12pt 0 8pt;
+  text-align: center;
+}
+.ieee .equation:not(.displaymath) {
+  position: relative;
+  counter-increment: equation;
+}
+.ieee .equation:not(.displaymath):after {
+  content: "(" counter(equation) ")";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  bottom: 50%;
+  line-height: 0;
+}
+.ieee .references {
+  margin-top: 18pt;
+}
+.ieee h1.references {
+  margin-top: 24pt;
+}
+.ieee cite {
+  margin-bottom: 3pt;
+  font-size: 8pt;
+  text-align: left;
+}

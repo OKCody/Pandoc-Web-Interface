@@ -16,27 +16,27 @@ then
 fi
 
 # If an example stylesheet has been selected, remove all styleshees in favor of that which is selected.
-echo $2 > text.txt
-echo "'"$(ls *.css)"'" >> text.txt
-if [ $2 == "none" ] && [ "$(ls *.css)" == "" ];
+echo $2 > debug.txt
+echo "'"$(ls *.css)"'" >> debug.txt
+if [ $2 == "custom" ] && [ "$(ls *.css)" == "" ];
 then
-  echo "Not using example, no custom style provided" > text.txt                 # Working
+  echo "Not using example, no custom style provided" > debug.txt                 # Working
   example="0"
   custom="0"
   stylesheet=""
   persistentStylesheet=$stylesheet
 fi
-if [ $2 == "none" ] && [ "$(ls *.css)" != "" ];
+if [ $2 == "custom" ] && [ "$(ls *.css)" != "" ];
 then
-  echo "Not using example, custom style provided" > text.txt                    # Working
+  echo "Not using example, custom style provided" > debug.txt                    # Working
   example="0"
   custom="1"
   stylesheet=$(ls *.css | head -1)
   persistentStylesheet=$stylesheet
 fi
-if [ $2 != "none" ] && [ "$(ls *.css)" != "" ];
+if [ $2 != "custom" ] && [ "$(ls *.css)" != "" ];
 then
-  echo "Using example, custom style provided" > text.txt                         # Working
+  echo "Using example, custom style provided" > debug.txt                         # Working
   example="1"
   custom="1"
   rm *.css    # Override provided stylesheet in favor of example stylesheet
@@ -44,9 +44,9 @@ then
   stylesheet=$(ls *.css | head -1)
   persistentStylesheet=$stylesheet
 fi
-if [ $2 != "none" ] && [ "$(ls *.css)" == "" ];  # If something other than default state is selected, do this . . .
+if [ $2 != "custom" ] && [ "$(ls *.css)" == "" ];  # If something other than default state is selected, do this . . .
 then
-  echo "Using Example, no custom style provided" > text.txt                     # Working
+  echo "Using Example, no custom style provided" > debug.txt                     # Working
   example="1"
   custom="0"
   rm *.css    # If an example stylesheet has been selected, remove all uploaded stylesheets
@@ -73,25 +73,25 @@ do
     then
         if [ $example == "0" ] && [ $custom == "0" ];
         then
-            echo "HTML Not using example, no custom style provided" >> text.txt      # Working
+            echo "HTML Not using example, no custom style provided" >> debug.txt      # Working
             stylesheet=""                                                            # Working
         fi
         if [ $example == "0" ] && [ $custom == "1" ];
         then
-            echo "HTML Not using example, custom style provided" >> text.txt         # Working
+            echo "HTML Not using example, custom style provided" >> debug.txt         # Working
             stylesheet="-c $stylesheet"                                              # Working
         fi
         if [ $example == "1" ] && [ $custom == "0" ];
         then
-            echo "HTML Using Example, no custom style provided" >> text.txt          # Working
+            echo "HTML Using Example, no custom style provided" >> debug.txt          # Working
             stylesheet="-c $stylesheet"                                              # Working
         fi
         if [ $example == "1" ] && [ $custom == "1" ];
         then
-            echo "HTML Using example, custom style provided" >> text.txt             # Working
+            echo "HTML Using example, custom style provided" >> debug.txt             # Working
             stylesheet="-c $stylesheet"                                              # Working
         fi
-        echo $stylesheet >> text.txt
+        echo $stylesheet >> debug.txt
         pandoc $filename.md -f markdown $stylesheet --mathjax -s -o $filename.html
     fi
     # end HTML conversion ---------------------
@@ -102,25 +102,25 @@ do
     then
         if [ $example == "0" ] && [ $custom == "0" ];
         then
-            echo "PDF Not using example, no custom style provided" >> text.txt      # Working
+            echo "PDF Not using example, no custom style provided" >> debug.txt      # Working
             stylesheet=""                                                           # Working
         fi
         if [ $example == "0" ] && [ $custom == "1" ];
         then
-            echo "PDF Not using example, custom style provided" >> text.txt         # Working
+            echo "PDF Not using example, custom style provided" >> debug.txt         # Working
             stylesheet="-c $stylesheet"                                             # Working, problem with font. Maybe font needs to be embedded? test condition: skeleton.css
         fi
         if [ $example == "1" ] && [ $custom == "0" ];
         then
-            echo "PDF Using Example, no custom style provided" >> text.txt          # Working
+            echo "PDF Using Example, no custom style provided" >> debug.txt          # Working
             stylesheet="-c $stylesheet"                                             # Working
         fi
         if [ $example == "1" ] && [ $custom == "1" ];
         then
-            echo "PDF Using example, custom style provided" >> text.txt             # Working
+            echo "PDF Using example, custom style provided" >> debug.txt             # Working
             stylesheet="-c $stylesheet"                                             # Working
         fi
-        echo $stylesheet >> text.txt
+        echo $stylesheet >> debug.txt
         pandoc $filename.md -f markdown $stylesheet --mathjax -s -o temp.html
         wkhtmltopdf --quiet --javascript-delay 1000 --user-style-sheet ../../print.css temp.html $filename.pdf
         rm temp.html
@@ -133,25 +133,25 @@ do
     then
         if [ $example == "0" ] && [ $custom == "0" ];
         then
-            echo "EPUB Not using example, no custom style provided" >> text.txt      # Working
+            echo "EPUB Not using example, no custom style provided" >> debug.txt      # Working
             stylesheet=""                                                            # Working
         fi
         if [ $example == "0" ] && [ $custom == "1" ];
         then
-            echo "EPUB Not using example, custom style provided" >> text.txt         # Working
+            echo "EPUB Not using example, custom style provided" >> debug.txt         # Working
             stylesheet="--epub-stylesheet $stylesheet"                               # Working
         fi
         if [ $example == "1" ] && [ $custom == "0" ];
         then
-            echo "EPUB Using Example, no custom style provided" >> text.txt          # Working
+            echo "EPUB Using Example, no custom style provided" >> debug.txt          # Working
             stylesheet="--epub-stylesheet $stylesheet"                               # Working
         fi
         if [ $example == "1" ] && [ $custom == "1" ];
         then
-            echo "EPUB Using example, custom style provided" >> text.txt             # Working
+            echo "EPUB Using example, custom style provided" >> debug.txt             # Working
             stylesheet="--epub-stylesheet $stylesheet"                               # Working
         fi
-        echo $stylesheet >> text.txt
+        echo $stylesheet >> debug.txt
         pandoc $filename.md -f markdown -t epub3 $stylesheet -o $filename.epub
     fi
     # end EPUB conversion ---------------------
