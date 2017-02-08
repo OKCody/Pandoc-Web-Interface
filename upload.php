@@ -13,6 +13,7 @@ $_SESSION["target_file"] = basename($_FILES["fileToUpload"]["name"]);
 $target_file = $_SESSION["target_file"];
 $user = exec('whoami');
 
+shell_exec("if [ -d uploads ]; then chown $user:$user uploads; else mkdir uploads; chown $user:$user uploads; fi");
 
 // Status variables
 shell_exec("mkdir $target_dir/$unique_ID");
