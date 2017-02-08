@@ -126,7 +126,12 @@ do
         # WKHTMLTOPDF has a known error that causes anything other than
         # letter-spacing of 0px to be extremely exaggerated. This script sets
         # letter-spacing to 0px for most common text tags.
-        wkhtmltopdf --quiet --viewport-size 1280x1024 --javascript-delay 1000 --user-style-sheet ../../print.css --run-script 'var elements = document.querySelectorAll("html,body,h1,h2,h3,h4,h5,h6,p,li,ol,pre,b,i,code,q,s"); for(var i = 0; i < elements.length; i++) { elements[i].style.letterSpacing = "0px"; }' temp.html $filename.pdf
+        if [ $OSTYPE == "linux-gnu" ];
+        then
+          xvfb-run wkhtmltopdf --quiet --javascript-delay 1000 --user-style-sheet ../../print.css --run-script 'var elements = document.querySelectorAll("html,body,h1,h2,h3,h4,h5,h6,p,li,ol,pre,b,i,code,q,s"); for(var i = 0; i < elements.length; i++) { elements[i].style.letterSpacing = "0px"; }' temp.html $filename.pdf
+        else
+          wkhtmltopdf --quiet --javascript-delay 1000 --user-style-sheet ../../print.css --run-script 'var elements = document.querySelectorAll("html,body,h1,h2,h3,h4,h5,h6,p,li,ol,pre,b,i,code,q,s"); for(var i = 0; i < elements.length; i++) { elements[i].style.letterSpacing = "0px"; }' temp.html $filename.pdf
+        fi
         rm temp.html
     fi
     # end HTML conversion ---------------------

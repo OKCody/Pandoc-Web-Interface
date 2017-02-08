@@ -11,10 +11,13 @@ $_SESSION["unique_ID"] = date(YmdHis) . _ . uniqid();
 $unique_ID = $_SESSION["unique_ID"];
 $_SESSION["target_file"] = basename($_FILES["fileToUpload"]["name"]);
 $target_file = $_SESSION["target_file"];
+$user = exec('whoami');
 
 
 // Status variables
 shell_exec("mkdir $target_dir/$unique_ID");
+// Ensure that the acting user has RW permission on unique session directory
+shell_exec("chown -R $user $target_dir/$unique_ID");
 $uploadOk = 1;
 $imageFileType = pathinfo($_SESSION["target_file"],PATHINFO_EXTENSION);
 $message = '';
@@ -107,16 +110,16 @@ if ($stylesheet == "ACM") {
     $stylesheet = 'stylesheets/acm.css';
 }
 if ($stylesheet == "Typebase") {
-    $stylesheet = 'stylesheets/Typebase.css';
+    $stylesheet = 'stylesheets/typebase.css';
 }
 if ($stylesheet == "Getaway") {
-    $stylesheet = 'stylesheets/Getaway.css';
+    $stylesheet = 'stylesheets/getaway.css';
 }
 
 // Call convert.sh script where the actual conversion takes place.
 // Optins here are passed to convert.sh script and their purposes are detailed
 //  on the first few lines of convert.sh
-shell_exec("bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4 $output5");
+shell_exec("sudo bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4 $output5");
 
 if ($message == ''){
     // When executed without error download file directly to index.php
