@@ -4,7 +4,7 @@
 session_start();
 date_default_timezone_set('America/Chicago');
 
-// File path variables
+// Variables
 $_SESSION["target_dir"] = "uploads/";
 $target_dir = $_SESSION["target_dir"];
 $_SESSION["unique_ID"] = date(YmdHis) . _ . uniqid();
@@ -13,12 +13,16 @@ $_SESSION["target_file"] = basename($_FILES["fileToUpload"]["name"]);
 $target_file = $_SESSION["target_file"];
 $user = exec('whoami');
 
-shell_exec("if [ -d uploads ]; then chown $user:$user uploads; else mkdir uploads; chown $user:$user uploads; fi");
+// If $target_dir does not alread exist, create it. If it does ensure it is owned
+// by $user
+shell_exec("if [ -d $target_dir ]; then chown $user:$user $target_dir; else mkdir $target_dir; chown $user:$user $target_dir; fi");
 
-// Status variables
+// Create unique directory in $target_dir
 shell_exec("mkdir $target_dir/$unique_ID");
+
 // Ensure that the acting user has RW permission on unique session directory
 shell_exec("chown -R $user $target_dir/$unique_ID");
+
 $uploadOk = 1;
 $imageFileType = pathinfo($_SESSION["target_file"],PATHINFO_EXTENSION);
 $message = '';
@@ -120,7 +124,7 @@ if ($stylesheet == "Getaway") {
 // Call convert.sh script where the actual conversion takes place.
 // Optins here are passed to convert.sh script and their purposes are detailed
 //  on the first few lines of convert.sh
-shell_exec("sudo bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4 $output5");
+shell_exec("bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4 $output5");
 
 if ($message == ''){
     // When executed without error download file directly to index.php
