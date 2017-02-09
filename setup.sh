@@ -1,20 +1,43 @@
+# OS Assumptions
+#
+# Distributor ID:	Ubuntu
+# Description:	Ubuntu 16.04.1 LTS
+# Release:	16.04
+# Codename:	xenial
+#
+# Returned by running $lsb_release -a
+
+# PHP
+#
 # In etc/php.ini make the following changes
 #   memory_limit = 128M
 #   upload_max_filesize = 100M
 #   post_max_size = 128M
 
-# Install pandoc
-sudo wget -P /etc/yum.repos.d/ https://copr.fedoraproject.org/coprs/petersen/pandoc-el5/repo/epel-5/petersen-pandoc-el5-epel-5.repo
-sudo yum install pandoc pandoc-citeproc
+sudo usermod -aG sudo ubuntu
 
-# Install unzip
-sudo yum install unzip
+# Update apt-get
+sudo apt-get Update
 
-# This command returns the user which PHP is running under. This user must be
-#   the owner of var/www/ ... in order to have write permissions there.
-# This will likely return 'apache'
-user = ${ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1}
-echo $user
+# Install Apache2
+sudo apt-get install apache2
+sudo apache2ctl configtest
+sudo systemctl restart apache2
+sudo ufw app list
+sudo ufw app info "Apache Full"
+sudo ufw allow in "Apache Full"
 
-# Make PHP the owner and therefor have RW permissions on www/
-sudo chown -R $user /var/www/
+# Install PHP
+sudo apt-get install php
+
+# Install Pandoc
+sudo apt-get install pandoc
+
+# Install WKHTMLTOPDF
+sudo apt-get install wkhtmltopdf
+
+# Install Xvfb
+sudo apt-get install xvfb
+
+# Restart Apache2
+sudo service apache2 restart
