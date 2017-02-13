@@ -4,6 +4,7 @@
 <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
+  <meta http-equiv="content-language" content="en" />
   <title>Pandoc Web Interface</title>
   <meta name="description" content="">
   <meta name="author" content="">
@@ -32,21 +33,28 @@
   <!-- Preview Javascript (changes the style of the "preview document" based on radio buttons)
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <script>
-  function ieee(){
-    document.getElementById('preview').classList=""; /*Removes all active CSS classes*/
-    document.getElementById('preview').classList.add("ieee"); /*Applies all .ieee classes*/
-  }
-  function acm(){
-    document.getElementById('preview').classList="";
-    document.getElementById('preview').classList.add("acm");
-  }
-  function typebase(){
-    document.getElementById('preview').classList="";
-    document.getElementById('preview').classList.add("typebase");
-  }
-  function getaway(){
-    document.getElementById('preview').classList="";
-    document.getElementById('preview').classList.add("getaway");
+  function preview(stylesheet){
+    switch(stylesheet){
+      case 'custom':
+        document.getElementById('preview-container').style.display="none";
+        break;
+      case 'more':
+        document.getElementById('more-options').style.display="block";
+        document.getElementById('more').style.display="none";
+        document.getElementById('less').style.display="inline-block";
+        break;
+      case 'less':
+        document.getElementById('more-options').style.display="none";
+        document.getElementById('less').style.display="none";
+        document.getElementById('more').style.display="inline-block";
+        break;
+      default:
+        document.getElementById('preview-container').style.display="block";
+        document.getElementById('preview').classList=""; /*Removes all active CSS classes*/
+        document.getElementById('preview').classList.add(stylesheet); /*Applies all classes of slected style*/
+        document.getElementById("stylesheets").scrollIntoView();
+    }
+
   }
   </script>
 
@@ -58,45 +66,112 @@
 <body>
   <div class="container">
     <div class="row" id="title">
-      <div class="twelve columns uploadForm">
+      <div class="twelve columns">
         <h1>Markdown File Converter</h1>
       </div>
     </div>
-    <form action="upload.php" method="post" enctype="multipart/form-data">
+    <div class="row">
+      <div class="twelve columns">
+        <h2>Parameters</h2>
+      </div>
+    </div>
+    <form class="box" action="upload.php" method="post" enctype="multipart/form-data">
       <div class="row">
-        <div class="twelve columns uploadForm">
-          <b>Select file to upload </b>
+        <div class="twelve columns">
+          <h4>Select file to upload</h4>
+        </div>
+      </div>
+      <div class="twelve columns options">
+        <div class="twelve columns">
           <input type="file" name="fileToUpload" id="fileToUpload"></input>
         </div>
       </div>
       <div class="row">
         <div class="twelve columns uploadForm">
-          <b>Output formats: </b>
-          <input type="checkbox" name="HTML" value="HTML">HTML</input>
-          <input type="checkbox" name="PDF" value="PDF">PDF</input>
-          <input type="checkbox" name="EPUB" value="EPUB">EPUB</input>
-          <input type="checkbox" name="DOCX" value="DOCX">DOCX</input>
+          <h4>Output formats:</h4>
+        </div>
+      </div>
+      <div class="row options">
+        <div class="three columns">
+          <input type="checkbox" id="HTML" name="HTML" value="HTML">
+          <label for="HTML">HTML</label>
+        </div>
+        <div class="three columns">
+          <input type="checkbox" id="PDF" name="PDF" value="PDF">
+          <label for="PDF">PDF</label>
+        </div>
+        <div class="three columns">
+          <input type="checkbox" id="EPUB" name="EPUB" value="EPUB">
+          <label for="EPUB">EPUB</label>
+        </div>
+        <div class="three columns">
+          <input type="checkbox" id="DOCX" name="DOCX" value="DOCX">
+          <label for="DOCX">DOCX</label>
+        </div>
+      </div>
+      <div id="stylesheets" class="row">
+        <div class="twelve columns uploadForm">
+          <h4>Stylesheet: </h4>
+        </div>
+      </div>
+      <div class="row options">
+        <!--"Custom" selection should indeed invoke a vanilla stylesheet for
+              preview. -one that matches Pandoc's default formatting-->
+        <div class="three columns">
+          <input type="radio" id ="custom" name="stylesheet" value="custom" checked="checked" onclick="preview('custom');">
+          <label for="custom">Custom</label>
+        </div>
+        <div class="three columns">
+          <input type="radio" id="IEEE" name="stylesheet" value="IEEE" onclick="preview('ieee');">
+          <label for="IEEE">IEEE.css</label>
+        </div>
+        <div class="three columns">
+          <input type="radio" id="ACM" name="stylesheet" value="ACM" onclick="preview('acm');">
+          <label for="ACM">ACM.css</label>
+        </div>
+        <div class="three columns">
+          <!--<input type="radio" id="more" name="stylesheet" value="more" onclick="preview('more');">
+          <label for="more">More...</label>-->
+          <div id="more" onclick="preview('more');">
+            <label>more...</label>
+          </div>
+          <div id="less" onclick="preview('less');">
+            <label>less</label>
+          </div>
+        </div>
+      </div>
+      <!--hidden row of stylesheet options-->
+      <div id="more-options" class="row options">
+        <div class="three columns">
+          <input type="radio" id="typebase" name="stylesheet" value="Typebase" onclick="preview('typebase');">
+          <label for="Typebase">Typebase.css</label>
+        </div>
+        <div class="three columns">
+          <input type="radio" id="Getaway" name="stylesheet" value="Getaway" onclick="preview('getaway');">
+          <label for="Getaway">Getaway.css</label>
+        </div>
+        <div class="three columns">
+          <input type="radio" id ="test" name="stylesheet" value="test" onclick="preview('test');">
+          <label for="test">Test</label>
+        </div>
+        <div class="three columns">
+          <input type="radio" id ="test" name="stylesheet" value="test" onclick="preview('test');">
+          <label for="test">Test</label>
         </div>
       </div>
       <div class="row">
-        <div class="twelve columns uploadForm">
-          <b>Stylesheet: </b>
-           <!--"Custom" selection should indeed invoke a vanilla stylesheet for
-                 preview. -one that matches Pandoc's default formatting-->
-           <input type="radio" name="stylesheet" value="custom" checked="checked" onclick="custom();">Custom</input>
-           <input type="radio" name="stylesheet" value="IEEE" onclick="ieee();">IEEE.css</input>
-           <input type="radio" name="stylesheet" value="ACM" onclick="acm();">ACM.css</input>
-           <input type="radio" name="stylesheet" value="Typebase" onclick="typebase();">Typebase.css</input>
-          <input type="radio" name="stylesheet" value="Getaway" onclick="getaway();">Getaway.css</input>
-        </div>
-      </div>
-      <div class="row">
-        <div class="twelve columns uploadForm">
+        <div class="twelve columns">
           <input type="submit" value="Convert" name="submit"></input>
         </div>
       </div>
+    </form>
+    <div id="preview-container">
       <div class="row">
-        <h1>Preview</h1>
+        <div class="twelve columns">
+          <h2>Preview</h2>
+        </div>
+      </div>
+      <div class="row box">
         <div id="preview" class="twelve columns">
           <h1 id="this-is-a-heading">This is a heading</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -127,6 +202,6 @@
         </div>
       </div>
     </div>
-  </form>
+  </div>
 </body>
 </html>
