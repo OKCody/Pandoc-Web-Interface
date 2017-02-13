@@ -66,3 +66,7 @@ label{
 #more-options{
   display: none;
 }
+
+#preview-container{
+  display: none;
+}
