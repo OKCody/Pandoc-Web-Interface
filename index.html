@@ -49,12 +49,14 @@
         document.getElementById('more').style.display="inline-block";
         break;
       default:
+        /*classList selector is not widely supported by modern browsers.
+          using className instead. className expects a space delimited
+          list of class names.*/
         document.getElementById('preview-container').style.display="block";
-        document.getElementById('preview').classList=""; /*Removes all active CSS classes*/
-        document.getElementById('preview').classList.add(stylesheet); /*Applies all classes of slected style*/
+        document.getElementById('preview').className='twleve'+' '+'columns'; /*Removes all active CSS classes*/
+        document.getElementById('preview').className+=' '+stylesheet; /*Applies all classes of slected style*/
         document.getElementById("stylesheets").scrollIntoView();
     }
-
   }
   </script>
 
@@ -143,7 +145,7 @@
       <!--hidden row of stylesheet options-->
       <div id="more-options" class="row options">
         <div class="three columns">
-          <input type="radio" id="typebase" name="stylesheet" value="Typebase" onclick="preview('typebase');">
+          <input type="radio" id="Typebase" name="stylesheet" value="Typebase" onclick="preview('typebase');">
           <label for="Typebase">Typebase.css</label>
         </div>
         <div class="three columns">

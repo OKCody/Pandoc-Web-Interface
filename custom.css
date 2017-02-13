@@ -20,7 +20,9 @@ input{
 
 label{
   display: inline;
+  cursor: pointer;
 }
+
 
 .options{
   background: #F6F6F6;
