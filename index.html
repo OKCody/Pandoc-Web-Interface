@@ -57,6 +57,9 @@
         document.getElementById('preview').className+=' '+stylesheet; /*Applies all classes of slected style*/
         document.getElementById("stylesheets").scrollIntoView();
     }
+    function myFunction(){
+      document.getElementById('frame').style.display="none";
+    }
   }
   </script>
 
@@ -80,7 +83,7 @@
     <form class="box" action="upload.php" method="post" enctype="multipart/form-data">
       <div class="row">
         <div class="twelve columns">
-          <h4>Select file to upload</h4>
+          <h4>File to Upload:</h4>
         </div>
       </div>
       <div class="twelve columns options">
@@ -90,7 +93,7 @@
       </div>
       <div class="row">
         <div class="twelve columns uploadForm">
-          <h4>Output formats:</h4>
+          <h4>Output Formats:</h4>
         </div>
       </div>
       <div class="row options">

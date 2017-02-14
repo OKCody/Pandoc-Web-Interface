@@ -52,6 +52,7 @@ label{
   background-color: transparent;
   border-radius: 4px;
   border: 1px solid #bbb;
+  width: 40px;
 }
 
 #less{
@@ -63,6 +64,7 @@ label{
   background-color: transparent;
   border-radius: 4px;
   border: 1px solid #bbb;
+  width: 40px;
 }
 
 #more-options{
@@ -71,4 +73,8 @@ label{
 
 #preview-container{
   display: none;
+}
+
+#frame{
+  display: block;
 }
