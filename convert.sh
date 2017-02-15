@@ -101,7 +101,7 @@ do
         fi
         echo "HTML Conversion ----------------------" >> debug.txt
         #echo $stylesheet >> debug.txt
-        pandoc $filename.md -f markdown $stylesheet --mathjax -s -o $filename.html >> debug.txt
+        pandoc $filename.md -f markdown $stylesheet --mathjax -s -o $filename.html 2>>debug.txt
     fi
     # end HTML conversion ---------------------
 
@@ -131,7 +131,7 @@ do
         fi
         echo "temp HTML Conversion -----------------" >> debug.txt
         #echo $stylesheet >> debug.txt
-        pandoc $filename.md -f markdown $stylesheet --mathjax -s -o temp.html >> debug.txt
+        pandoc $filename.md -f markdown $stylesheet --mathjax -s -o temp.html 2>>debug.txt
         # --run-script removes letter-spacing from the most common text tags.
         # WKHTMLTOPDF has a known error that causes anything other than
         # letter-spacing of 0px to be extremely exaggerated. This script sets
@@ -139,10 +139,10 @@ do
         if [ $OSTYPE == "linux-gnu" ];
         then
           echo "PDF Conversion -----------------------" >> debug.txt
-          xvfb-run wkhtmltopdf --quiet --javascript-delay 1000 --user-style-sheet ../../print.css --run-script 'var elements = document.querySelectorAll("html,body,h1,h2,h3,h4,h5,h6,p,li,ol,pre,b,i,code,q,s"); for(var i = 0; i < elements.length; i++) { elements[i].style.letterSpacing = "0px"; }' temp.html $filename.pdf
+          xvfb-run wkhtmltopdf --quiet --javascript-delay 1000 --user-style-sheet ../../print.css --run-script 'var elements = document.querySelectorAll("html,body,h1,h2,h3,h4,h5,h6,p,li,ol,pre,b,i,code,q,s"); for(var i = 0; i < elements.length; i++) { elements[i].style.letterSpacing = "0px"; }' temp.html $filename.pdf 2>>debug.txt
         else
           echo "PDF Conversion -----------------------" >> debug.txt
-          wkhtmltopdf --quiet --javascript-delay 1000 --user-style-sheet ../../print.css --run-script 'var elements = document.querySelectorAll("html,body,h1,h2,h3,h4,h5,h6,p,li,ol,pre,b,i,code,q,s"); for(var i = 0; i < elements.length; i++) { elements[i].style.letterSpacing = "0px"; }' temp.html $filename.pdf
+          wkhtmltopdf --quiet --javascript-delay 1000 --user-style-sheet ../../print.css --run-script 'var elements = document.querySelectorAll("html,body,h1,h2,h3,h4,h5,h6,p,li,ol,pre,b,i,code,q,s"); for(var i = 0; i < elements.length; i++) { elements[i].style.letterSpacing = "0px"; }' temp.html $filename.pdf 2>>debug.txt
         fi
         rm temp.html
     fi
@@ -174,7 +174,7 @@ do
         fi
         echo "EPUB Conversion ----------------------" >> debug.txt
         #echo $stylesheet >> debug.txt
-        pandoc $filename.md -f markdown -t epub3 $stylesheet -o $filename.epub >> debug.txt
+        pandoc $filename.md -f markdown -t epub3 $stylesheet -o $filename.epub 2>>debug.txt
     fi
     # end EPUB conversion ---------------------
 
@@ -182,7 +182,7 @@ do
     if [ $output == "docx" ];
     then
         echo "DOCX Conversion ----------------------" >> debug.txt
-        pandoc $filename.md -f markdown -o $filename.docx >> debug.txt                        # Working
+        pandoc $filename.md -f markdown -o $filename.docx 2>>debug.txt                        # Working
     fi
     # end EPUB conversion ---------------------
 
