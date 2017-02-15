@@ -7,6 +7,14 @@
 
 # Move into unique directory created for a given session
 cd $1
+echo "PID: $$" > debug.txt
+echo $1 >> debug.txt
+echo $2 >> debug.txt
+echo $3 >> debug.txt
+echo $4 >> debug.txt
+echo $5 >> debug.txt
+echo $6 >> debug.txt
+
 
 # If a .zip file is present in unique directory, unzip it. Otherwise move on
 #   to conversion.
@@ -16,11 +24,11 @@ then
 fi
 
 # If an example stylesheet has been selected, remove all styleshees in favor of that which is selected.
-echo $2 > debug.txt
-echo "'"$(ls *.css)"'" >> debug.txt
+#echo $2 >> debug.txt
+#echo "'"$(ls *.css)"'" >> debug.txt
 if [ $2 == "custom" ] && [ "$(ls *.css)" == "" ];
 then
-  echo "Not using example, no custom style provided" > debug.txt                 # Working
+  #echo "Not using example, no custom style provided" >> debug.txt                 # Working
   example="0"
   custom="0"
   stylesheet=""
@@ -28,7 +36,7 @@ then
 fi
 if [ $2 == "custom" ] && [ "$(ls *.css)" != "" ];
 then
-  echo "Not using example, custom style provided" > debug.txt                    # Working
+  #echo "Not using example, custom style provided" >> debug.txt                    # Working
   example="0"
   custom="1"
   stylesheet=$(ls *.css | head -1)
@@ -36,7 +44,7 @@ then
 fi
 if [ $2 != "custom" ] && [ "$(ls *.css)" != "" ];
 then
-  echo "Using example, custom style provided" > debug.txt                         # Working
+  #echo "Using example, custom style provided" >> debug.txt                         # Working
   example="1"
   custom="1"
   rm *.css    # Override provided stylesheet in favor of example stylesheet
@@ -46,7 +54,7 @@ then
 fi
 if [ $2 != "custom" ] && [ "$(ls *.css)" == "" ];  # If something other than default state is selected, do this . . .
 then
-  echo "Using Example, no custom style provided" > debug.txt                     # Working
+  #echo "Using Example, no custom style provided" >> debug.txt                     # Working
   example="1"
   custom="0"
   rm *.css    # If an example stylesheet has been selected, remove all uploaded stylesheets
@@ -73,26 +81,27 @@ do
     then
         if [ $example == "0" ] && [ $custom == "0" ];
         then
-            echo "HTML Not using example, no custom style provided" >> debug.txt      # Working
+            #echo "HTML Not using example, no custom style provided" >> debug.txt      # Working
             stylesheet=""                                                            # Working
         fi
         if [ $example == "0" ] && [ $custom == "1" ];
         then
-            echo "HTML Not using example, custom style provided" >> debug.txt         # Working
+            #echo "HTML Not using example, custom style provided" >> debug.txt         # Working
             stylesheet="-c $stylesheet"                                              # Working
         fi
         if [ $example == "1" ] && [ $custom == "0" ];
         then
-            echo "HTML Using Example, no custom style provided" >> debug.txt          # Working
+            #echo "HTML Using Example, no custom style provided" >> debug.txt          # Working
             stylesheet="-c $stylesheet"                                              # Working
         fi
         if [ $example == "1" ] && [ $custom == "1" ];
         then
-            echo "HTML Using example, custom style provided" >> debug.txt             # Working
+            #echo "HTML Using example, custom style provided" >> debug.txt             # Working
             stylesheet="-c $stylesheet"                                              # Working
         fi
-        echo $stylesheet >> debug.txt
-        pandoc $filename.md -f markdown $stylesheet --mathjax -s -o $filename.html
+        echo "HTML Conversion ----------------------" >> debug.txt
+        #echo $stylesheet >> debug.txt
+        pandoc $filename.md -f markdown $stylesheet --mathjax -s -o $filename.html >> debug.txt
     fi
     # end HTML conversion ---------------------
 
@@ -102,34 +111,37 @@ do
     then
         if [ $example == "0" ] && [ $custom == "0" ];
         then
-            echo "PDF Not using example, no custom style provided" >> debug.txt      # Working
+            #echo "PDF Not using example, no custom style provided" >> debug.txt      # Working
             stylesheet=""                                                           # Working
         fi
         if [ $example == "0" ] && [ $custom == "1" ];
         then
-            echo "PDF Not using example, custom style provided" >> debug.txt         # Working
+            #echo "PDF Not using example, custom style provided" >> debug.txt         # Working
             stylesheet="-c $stylesheet"                                             # Working, problem with font. Maybe font needs to be embedded? test condition: skeleton.css
         fi
         if [ $example == "1" ] && [ $custom == "0" ];
         then
-            echo "PDF Using Example, no custom style provided" >> debug.txt          # Working
+            #echo "PDF Using Example, no custom style provided" >> debug.txt          # Working
             stylesheet="-c $stylesheet"                                             # Working
         fi
         if [ $example == "1" ] && [ $custom == "1" ];
         then
-            echo "PDF Using example, custom style provided" >> debug.txt             # Working
+            #echo "PDF Using example, custom style provided" >> debug.txt             # Working
             stylesheet="-c $stylesheet"                                             # Working
         fi
-        echo $stylesheet >> debug.txt
-        pandoc $filename.md -f markdown $stylesheet --mathjax -s -o temp.html
+        echo "temp HTML Conversion -----------------" >> debug.txt
+        #echo $stylesheet >> debug.txt
+        pandoc $filename.md -f markdown $stylesheet --mathjax -s -o temp.html >> debug.txt
         # --run-script removes letter-spacing from the most common text tags.
         # WKHTMLTOPDF has a known error that causes anything other than
         # letter-spacing of 0px to be extremely exaggerated. This script sets
         # letter-spacing to 0px for most common text tags.
         if [ $OSTYPE == "linux-gnu" ];
         then
+          echo "PDF Conversion -----------------------" >> debug.txt
           xvfb-run wkhtmltopdf --quiet --javascript-delay 1000 --user-style-sheet ../../print.css --run-script 'var elements = document.querySelectorAll("html,body,h1,h2,h3,h4,h5,h6,p,li,ol,pre,b,i,code,q,s"); for(var i = 0; i < elements.length; i++) { elements[i].style.letterSpacing = "0px"; }' temp.html $filename.pdf
         else
+          echo "PDF Conversion -----------------------" >> debug.txt
           wkhtmltopdf --quiet --javascript-delay 1000 --user-style-sheet ../../print.css --run-script 'var elements = document.querySelectorAll("html,body,h1,h2,h3,h4,h5,h6,p,li,ol,pre,b,i,code,q,s"); for(var i = 0; i < elements.length; i++) { elements[i].style.letterSpacing = "0px"; }' temp.html $filename.pdf
         fi
         rm temp.html
@@ -142,33 +154,35 @@ do
     then
         if [ $example == "0" ] && [ $custom == "0" ];
         then
-            echo "EPUB Not using example, no custom style provided" >> debug.txt      # Working
+            #echo "EPUB Not using example, no custom style provided" >> debug.txt      # Working
             stylesheet=""                                                            # Working
         fi
         if [ $example == "0" ] && [ $custom == "1" ];
         then
-            echo "EPUB Not using example, custom style provided" >> debug.txt         # Working
+            #echo "EPUB Not using example, custom style provided" >> debug.txt         # Working
             stylesheet="--epub-stylesheet $stylesheet"                               # Working
         fi
         if [ $example == "1" ] && [ $custom == "0" ];
         then
-            echo "EPUB Using Example, no custom style provided" >> debug.txt          # Working
+            #echo "EPUB Using Example, no custom style provided" >> debug.txt          # Working
             stylesheet="--epub-stylesheet $stylesheet"                               # Working
         fi
         if [ $example == "1" ] && [ $custom == "1" ];
         then
-            echo "EPUB Using example, custom style provided" >> debug.txt             # Working
+            #echo "EPUB Using example, custom style provided" >> debug.txt             # Working
             stylesheet="--epub-stylesheet $stylesheet"                               # Working
         fi
-        echo $stylesheet >> debug.txt
-        pandoc $filename.md -f markdown -t epub3 $stylesheet -o $filename.epub
+        echo "EPUB Conversion ----------------------" >> debug.txt
+        #echo $stylesheet >> debug.txt
+        pandoc $filename.md -f markdown -t epub3 $stylesheet -o $filename.epub >> debug.txt
     fi
     # end EPUB conversion ---------------------
 
     # DOCX conversion                                                            # Working 1/8/17 11:38pm
     if [ $output == "docx" ];
     then
-        pandoc $filename.md -f markdown -o $filename.docx                        # Working
+        echo "DOCX Conversion ----------------------" >> debug.txt
+        pandoc $filename.md -f markdown -o $filename.docx >> debug.txt                        # Working
     fi
     # end EPUB conversion ---------------------
 
