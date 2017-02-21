@@ -12,7 +12,21 @@ input{
   margin-top: 50px;
 }
 
-.box{
+.border{
+  border: 1px solid #E1E1E1;
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.form{
+  border: 1px solid #E1E1E1;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.alert{
+  display: none;
   border: 1px solid #E1E1E1;
   border-radius: 4px;
   padding: 20px;

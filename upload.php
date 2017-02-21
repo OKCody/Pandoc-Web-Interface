@@ -43,10 +43,11 @@ if($imageFileType == "zip" || $imageFileType == "ZIP"){
     }
 }
 // Check if file already exists
-if (file_exists($target_dir . $_SESSION["unique_ID"] . $_SESSION["target_file"])) {
-    $message = $message . "Error: File already exists. <br>";
-    $uploadOk = 0;
-}
+// if (file_exists($target_dir . $_SESSION["unique_ID"] . $_SESSION["target_file"])) {
+//     $message = $message . "Error: File already exists. <br>";
+//     $uploadOk = 0;
+// }
+
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 104857600) {
     $message = $message . "Error: File is too large. Limit = 100Mb <br>";
