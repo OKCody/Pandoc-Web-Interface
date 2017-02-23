@@ -40,6 +40,30 @@ Paragraph text requires no syntax.
 ###### Heading 6
 ```
 
+1. Item one in an ordered list
+2. Item two in an ordered list
+3. Item three
+
+```
+1. Item one in an ordered list
+2. Item two in an ordered list
+3. Item three
+```
+
+- First item in an unordered list
+- Second
+  - Second and one-half
+    - Second and three-quarters
+- Third
+
+```
+- First item in an unordered list
+- Second
+  - Second and one-half
+    - Second and three-quarters
+- Third
+```
+
 >Blockquote
 >>Nested blockquote
 

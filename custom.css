@@ -114,7 +114,7 @@ label{
 }
 
 #reference-container{
-  display: none;
+  display: block;
 }
 
 #frame{
@@ -125,4 +125,15 @@ pre > code {
     display: block;
     padding: 1rem 1.5rem;
     white-space: pre-line;
+}
+
+img{
+  max-width: 100%;
+}
+
+.caption{
+  font-style: italic;
+  text-align: center;
+  max-width: 80%;
+  padding-left: 10%;
 }

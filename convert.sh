@@ -131,6 +131,7 @@ do
         fi
         echo "temp HTML Conversion -----------------" >> debug.txt
         #echo $stylesheet >> debug.txt
+
         pandoc $filename.md -f markdown $stylesheet --mathjax -s -o temp.html 2>>debug.txt
         # --run-script removes letter-spacing from the most common text tags.
         # WKHTMLTOPDF has a known error that causes anything other than
