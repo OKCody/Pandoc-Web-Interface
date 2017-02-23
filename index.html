@@ -58,6 +58,7 @@
         document.getElementById("stylesheets").scrollIntoView();
     }
   }
+
   function convert(state){
     switch(state){
       case 'alert':
@@ -73,6 +74,29 @@
         document.getElementById('preview-container').style.display="block";
     }
   }
+
+  function show(element){
+    switch(element){
+      case 'form-container':
+        document.getElementById('form-container-title').style.display="block";
+        break;
+      case 'reference-container':
+        document.getElementById('reference-container').style.display="block";
+        break;
+      default:
+    }
+  }
+
+  function hide(element){
+    switch(element){
+      case 'reference-container':
+        document.getElementById('reference-container').style.display="none";
+
+        break;
+      default:
+    }
+  }
+
   </script>
 
   <!-- MathJax Include, of course. -for prefiew
@@ -87,6 +111,21 @@
         <h1>Markdown File Converter</h1>
       </div>
     </div>
+    <div class="row" id="menu">
+      <a href="#form-container">
+        <div class="six columns" onclick="show('form-container');">
+          <h6>Converter</h6>
+        </div>
+      </a>
+      <a href="#reference-container">
+        <div class="six columns" onclick="show('reference-container');">
+          <h6>Reference</h6>
+        </div>
+      </a>
+      <!--<div class="four columns">
+        <h6>About</h6>
+      </div>-->
+    </div>
     <div id="form-container-title" class="row">
       <div class="twelve columns">
         <h2>Parameters</h2>
@@ -95,7 +134,7 @@
     <form id="form-container" class="form" action="upload.php" method="post" enctype="multipart/form-data">
       <div class="row">
         <div class="twelve columns">
-          <h4>File to Upload:</h4>
+          <h6>File to Upload:</h6>
         </div>
       </div>
       <div class="twelve columns options">
@@ -105,7 +144,7 @@
       </div>
       <div class="row">
         <div class="twelve columns uploadForm">
-          <h4>Output Formats:</h4>
+          <h6>Output Formats:</h6>
         </div>
       </div>
       <div class="row options">
@@ -128,7 +167,7 @@
       </div>
       <div id="stylesheets" class="row">
         <div class="twelve columns uploadForm">
-          <h4>Stylesheet: </h4>
+          <h6>Stylesheet: </h6>
         </div>
       </div>
       <div class="row options">
@@ -221,6 +260,63 @@
           <li id="fn1"><p>This is a footnote.<a href="#fnref1">↩</a></p></li>
           </ol>
           </div>
+        </div>
+      </div>
+    </div>
+    <div id="reference-container">
+      <div class="row">
+        <div class="twelve columns">
+          <h2>Reference</h2>
+        </div>
+      </div>
+      <div class="row border">
+        <div id="reference" class="twelve columns">
+          <p>Paragraph text requires no syntax.</p>
+          <pre><code>Paragraph text requires no syntax.</code></pre>
+          <p><em>Italic</em></p>
+          <pre><code>*Italic*</code></pre>
+          <p><strong>Bold</strong></p>
+          <pre><code>**Bold**</code></pre>
+          <p><a href="http://libraries.ou.edu">OU Libraries</a></p>
+          <pre><code>[OU Libraries](http://libraries.ou.edu)</code></pre>
+          <div class="figure">
+          <img src="https://libraries.ou.edu/sites/all/themes/oulib_bootstrap/img/ou_lib_logo.png" alt="Image" />
+          <p class="caption">Image</p>
+          </div>
+          <pre><code>![Image](https://libraries.ou.edu/sites/all/themes/oulib_bootstrap/img/ou_lib_logo.png)</code></pre>
+          <h1 id="heading-1">Heading 1</h1>
+          <h2 id="heading-2">Heading 2</h2>
+          <h3 id="heading-3">Heading 3</h3>
+          <h4 id="heading-4">Heading 4</h4>
+          <h5 id="heading-5">Heading 5</h5>
+          <h6 id="heading-6">Heading 6</h6>
+          <pre><code># Heading 1
+          ## Heading 2
+          ### Heading 3
+          #### Heading 4
+          ##### Heading 5
+          ###### Heading 6</code></pre>
+          <blockquote>
+          <p>Blockquote</p>
+          </blockquote>
+          <blockquote>
+          <blockquote>
+          <p>Nested blockquote</p>
+          </blockquote>
+          </blockquote>
+          <pre><code>&gt; Blockquote
+
+          &gt;&gt; Nested Blockquote</code></pre>
+          <hr />
+          <pre><code>---</code></pre>
+          <p><code>Inline code</code> with backticks</p>
+          <pre><code>`Inline code` with backticks</code></pre>
+          <pre><code>// This is a codeblock
+          print(&quot;3 backticks or&quot;);
+          print(&quot;indent 4 spaces&quot;);</code></pre>
+          <pre><code>    // This is a codeblock
+              print(&quot;3 backticks or&quot;);
+              print(&quot;indent 4 spaces&quot;);</code></pre>
         </div>
       </div>
     </div>
