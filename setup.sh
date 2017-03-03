@@ -40,5 +40,8 @@ sudo apt-get install wkhtmltopdf
 # Install Xvfb
 sudo apt-get install xvfb
 
+# Install zip
+sudo apt-get install zip
+
 # Restart Apache2
 sudo service apache2 restart
