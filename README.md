@@ -13,3 +13,7 @@ Converted files are zipped and directly downloaded in browser
 Conversiton to PDF is done using the tool [WKHTMLTOPDF](http://wkhtmltopdf.org/):
 
 `.md -> Pandoc -> .html (w/ CSS) -> WKHTMLTOPDF -> .pdf`
+
+## License
+
+Interface is licensed under an MIT License.
