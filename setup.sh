@@ -28,7 +28,8 @@ sudo ufw app info "Apache Full"
 sudo ufw allow in "Apache Full"
 
 # Install PHP
-sudo apt-get install php
+sudo apt-get install php7.0
+sudo apt-get install libapache2-mod-php7.0
 
 # Install Pandoc
 sudo apt-get install pandoc
