@@ -17,7 +17,7 @@
 sudo usermod -aG sudo ubuntu
 
 # Update apt-get
-sudo apt-get Update
+sudo apt-get update
 
 # Install Apache2
 sudo apt-get install apache2
