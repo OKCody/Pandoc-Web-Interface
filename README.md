@@ -16,4 +16,4 @@ Conversiton to PDF is done using the tool [WKHTMLTOPDF](http://wkhtmltopdf.org/)
 
 ## License
 
-Interface is licensed under an MIT License.
+Interface is licensed under an [MIT License](license.md).
