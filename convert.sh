@@ -30,14 +30,6 @@ then
   rm -rf $dir
 fi
 
-
-=======
-if [ -e *.zip ]     # "if a .zip file exists, do this . . ."
-then
-  unzip -j *.zip    # unzip into working directory without subdirectories
-fi
-
->>>>>>> 9524e446e27e4fb3c8565d415bf4dbbf8bf78126
 # If an example stylesheet has been selected, remove all styleshees in favor of that which is selected.
 #echo $2 >> debug.txt
 #echo "'"$(ls *.css)"'" >> debug.txt
