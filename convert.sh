@@ -220,4 +220,4 @@ do
 done
 
 # zip all files in working directory into an archive excluding any .zip files
-zip converted.zip * -x *.zip
+zip -r converted.zip * -x *.zip
