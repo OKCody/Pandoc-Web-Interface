@@ -23,11 +23,32 @@ then
   archive="$(ls *.zip)"
   unzip $archive
   dir="${archive%.zip}"
+  echo "$(pwd)" >> debug.txt
+  echo $archive >> debug.txt
+  echo $dir >> debug.txt
+
+  echo "__MACOSX ----" >> debug.txt
+  echo "$(ls __MACOSX)" >> debug.txt
   rm -rf __MACOSX
+
+  echo "dir/.* ----" >> debug.txt
+  echo "$(ls $dir/.*)" >> debug.txt
   rm -rf $dir/.*
+
+  echo "dir/* ----" >> debug.txt
+  echo "$(ls $dir/*)" >> debug.txt
   mv $dir/* .
+
+  echo "ls before----" >> debug.txt
+  echo "$(ls)" >> debug.txt
+  echo "----" >> debug.txt
+
   rm -rf $dir
   rm -rf $archive
+
+  echo "ls after----" >> debug.txt
+  echo "$(ls)" >> debug.txt
+  echo "----" >> debug.txt
 fi
 
 
