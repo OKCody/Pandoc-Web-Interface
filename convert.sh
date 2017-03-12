@@ -18,11 +18,26 @@ echo $6 >> debug.txt
 
 # If a .zip file is present in unique directory, unzip it. Otherwise move on
 #   to conversion.
+if [ -e *.zip ];   # If a .zip archive exists...
+then
+  archive="$(ls *.zip)"
+  unzip $archive
+  dir="${archive%.zip}"
+  rm -rf $archive
+  rm -rf __MACOSX
+  rm -rf $dir/.*
+  mv $dir/* .
+  rm -rf $dir
+fi
+
+
+=======
 if [ -e *.zip ]     # "if a .zip file exists, do this . . ."
 then
   unzip -j *.zip    # unzip into working directory without subdirectories
 fi
 
+>>>>>>> 9524e446e27e4fb3c8565d415bf4dbbf8bf78126
 # If an example stylesheet has been selected, remove all styleshees in favor of that which is selected.
 #echo $2 >> debug.txt
 #echo "'"$(ls *.css)"'" >> debug.txt
