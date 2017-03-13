@@ -137,3 +137,19 @@ img{
   max-width: 80%;
   padding-left: 10%;
 }
+
+#footer{
+  padding-bottom: 50px;
+}
+
+#octocat{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 40px;
+  width: 40px;
+}
+
+#octocat img{
+  width: 100%;
+}

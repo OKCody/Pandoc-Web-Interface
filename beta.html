@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <meta http-equiv="content-language" content="en" />
+  <title>Markdown File Converter</title>
+  <meta name="description" content="This tool converts markdown files to HTML, PDF, EPUB, and DOCX formats and allows styling of each via CSS.">
+  <meta name="author" content="Cody Taylor">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+
+  <!-- Page CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" type="text/css" href="normalize.css">
+  <link rel="stylesheet" type="text/css" href="skeleton.css">
+  <link rel="stylesheet" type="text/css" href="custom.css">
+
+  <!-- Preview CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" type="text/css" href="preview/ieee.css">
+  <link rel="stylesheet" type="text/css" href="preview/acm.css">
+  <link rel="stylesheet" type="text/css" href="preview/typebase.css">
+  <link rel="stylesheet" type="text/css" href="preview/getaway.css">
+
+  <!-- Preview Javascript (changes the style of the "preview document" based on radio buttons)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script>
+  function preview(stylesheet){
+    switch(stylesheet){
+      case 'custom':
+        document.getElementById('preview-container').style.display="none";
+        break;
+      case 'more':
+        document.getElementById('more-options').style.display="block";
+        document.getElementById('more').style.display="none";
+        document.getElementById('less').style.display="inline-block";
+        break;
+      case 'less':
+        document.getElementById('more-options').style.display="none";
+        document.getElementById('less').style.display="none";
+        document.getElementById('more').style.display="inline-block";
+        break;
+      default:
+        /*classList selector is not widely supported by modern browsers.
+          using className instead. className expects a space delimited
+          list of class names.*/
+        document.getElementById('preview-container').style.display="block";
+        document.getElementById('preview').className='twleve'+' '+'columns'; /*Removes all active CSS classes*/
+        document.getElementById('preview').className+=' '+stylesheet; /*Applies all classes of slected style*/
+        document.getElementById("stylesheets").scrollIntoView();
+    }
+  }
+
+  function convert(state){
+    switch(state){
+      case 'alert':
+        document.getElementById('form-container').style.display="none";
+        document.getElementById('form-container-title').style.display="none";
+        document.getElementById('preview-container').style.display="none";
+        document.getElementById('reference-container').style.display="none";
+        document.getElementById('alert').style.display="block";
+        break;
+      default:
+        document.getElementById('alert').style.display="none";
+        document.getElementById('form-container').style.display="block";
+        document.getElementById('form-container-title').style.display="block";
+        //document.getElementById('preview-container').style.display="block";
+        document.getElementById('reference-container').style.display="block";
+    }
+  }
+
+  function show(element){
+    switch(element){
+      case 'form-container':
+        document.getElementById('form-container-title').style.display="block";
+        break;
+      case 'reference-container':
+        document.getElementById('reference-container').style.display="block";
+        break;
+      default:
+    }
+  }
+
+  function hide(element){
+    switch(element){
+      case 'reference-container':
+        document.getElementById('reference-container').style.display="none";
+
+        break;
+      default:
+    }
+  }
+
+  </script>
+
+  <!-- MathJax Include, of course. -for prefiew
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</head>
+<body>
+  <!-- Beta Banner -->
+  <a href="http://github.com/OKCody/Pandoc-Web-Interface"><p style="height: 25px; width: 300px; position: fixed; top: 35px; right: -100px; background-color: orange; transform: rotate(45deg); text-align: center; box-shadow: 0px 0px 10px rgba(0,0,0,0.3); color: white; font-weight: bold; z-index: 1;">Beta</p></a>
+  <!-- /Beta Banner -->
+  <div class="container">
+    <div class="row" id="title">
+      <div class="twelve columns">
+        <h1>Markdown File Converter</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="twelve columns border">
+        <p>This application is currently under development. As such, files uploaded are being stored for purposes of performance analysis. Once a more stable release is made available, this service will begin immediately deleting uploaded files after they are processed.</p>
+        <p>Direct inquiries about this application to <a href="mailto:codyalantaylor@gmail.com?Subject=Pandoc-Web-Interface">codyalantaylor@gmail.com</a>.</p>
+        <p>If you'd like to contribute to this application or host your own instance the code may be found on <a href="http://github.com/OKCody/Pandoc-Web-Interface">Github</a>.</p>
+      </div>
+    </div>
+    <div id="footer" class="row">
+      <div class="twelve columns">
+        <div id="octocat">
+          <a href="http://github.com/OKCody/Pandoc-Web-Interface"><img src="assets/mark-github.svg"></img></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
