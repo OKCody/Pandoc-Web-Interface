@@ -45,3 +45,6 @@ sudo apt-get install zip
 
 # Restart Apache2
 sudo service apache2 restart
+
+# Configure bash to match filenames in a case-insensitive way
+sudo shopt -s nocaseglob
