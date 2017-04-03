@@ -60,21 +60,25 @@ if($imageFileType != "md" && $imageFileType != "MD" && $imageFileType != "txt"
     $uploadOk = 0;
 }
 // read in output formats
-$output2 = '';
-$output3 = '';
-$output4 = '';
-$output5 = '';
+$output2 = 'null';
+$output3 = 'null';
+$output4 = 'null';
+$output5 = 'null';
+$option1 = 'null';
 if (isset($_POST["HTML"])) {
-    $output2 = 'html';
+  $output2 = 'html';
 }
 if (isset($_POST["PDF"])) {
-    $output3 = 'pdf';
+  $output3 = 'pdf';
 }
 if (isset($_POST["EPUB"])) {
-    $output4 = 'epub3';
+  $output4 = 'epub3';
 }
 if (isset($_POST["DOCX"])) {
-    $output5 = 'docx';
+  $output5 = 'docx';
+}
+if (isset($_POST["Stand-Alone"])) {
+  $option1 = 'stand-alone';
 }
 if (empty($output2) && empty($output3) && empty($output4) && empty($output5)){
     $message = $message . "Error: No output format selected. <br>";
@@ -126,7 +130,7 @@ if ($stylesheet == "Getaway") {
 // Optins here are passed to convert.sh script and their purposes are detailed
 //  on the first few lines of convert.sh
 
-shell_exec("wait; bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4 $output5 &");
+shell_exec("wait; bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4 $output5 $option1");
 
 if ($message == ''){
     // When executed without error download file directly to index.php

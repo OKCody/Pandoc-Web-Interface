@@ -153,3 +153,10 @@ img{
 #octocat img{
   width: 100%;
 }
+
+#option-Stand-Alone{
+  display: none;
+  left: 20px;
+  position: relative;
+  color: gray;
+}

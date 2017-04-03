@@ -4,6 +4,7 @@
 # $4 = pdf extension
 # $5 = epub3 extension
 # $6 = docx extension
+# $7 = stand-alone option
 
 # Move into unique directory created for a given session
 cd $1
@@ -14,6 +15,7 @@ echo $3 >> debug.txt
 echo $4 >> debug.txt
 echo $5 >> debug.txt
 echo $6 >> debug.txt
+echo $7 >> debug.txt
 
 
 # If a .zip file is present in unique directory, unzip it. Otherwise move on
@@ -131,8 +133,20 @@ do
         echo "HTML Conversion ----------------------" >> debug.txt
         #echo $stylesheet >> debug.txt
         pandoc $filename.md -f markdown $stylesheet --mathjax -s -o $filename.html 2>>debug.txt
+        #pandoc $filename.md -f markdown $stylesheet -o $filename.html 2>>debug.txt
+
+
+        # stand-alone generation ---------------------
+        if [ $7 == "stand-alone" ];
+        then
+            echo "Stand-Alone Generation ----------------------" >> debug.txt
+            cat ../../head.html $filename.html ../../tail.html > sandwich.html
+        fi
+        # end stand-alone generation ---------------------
     fi
     # end HTML conversion ---------------------
+
+
 
     # PDF conversion                                                            #   Working 1/8/17 10:27pm
     stylesheet=$persistentStylesheet

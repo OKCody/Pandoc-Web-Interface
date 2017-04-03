@@ -77,25 +77,16 @@
     }
   }
 
-  function show(element){
-    switch(element){
-      case 'form-container':
-        document.getElementById('form-container-title').style.display="block";
-        break;
-      case 'reference-container':
-        document.getElementById('reference-container').style.display="block";
-        break;
-      default:
-    }
-  }
-
-  function hide(element){
-    switch(element){
-      case 'reference-container':
-        document.getElementById('reference-container').style.display="none";
-
-        break;
-      default:
+  function toggle(id) {
+    var element = document.getElementById(id);
+    if (element) {
+      var display = element.style.display;
+      if (display == "none") {
+          element.style.display = "block";
+      } else {
+          element.checked = false;
+          element.style.display = "none";
+      }
     }
   }
 
@@ -156,8 +147,14 @@
       </div>
       <div class="row options">
         <div class="three columns">
-          <input type="checkbox" id="HTML" name="HTML" value="HTML">
-          <label for="HTML">HTML</label>
+          <div style="min-width: 100px;">
+            <input type="checkbox" id="HTML" name="HTML" value="HTML" onclick="toggle('option-Stand-Alone');">
+            <label for="HTML">HTML</label>
+          </div>
+          <div id="option-Stand-Alone" style="display: none;">
+            <input type="checkbox" id="Stand-Alone" name="Stand-Alone" value="Stand-Alone">
+            <label for="Stand-Alone">Stand-Alone</label>
+          </div>
         </div>
         <div class="three columns">
           <input type="checkbox" id="PDF" name="PDF" value="PDF">
