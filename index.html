@@ -38,16 +38,6 @@
       case 'custom':
         document.getElementById('preview-container').style.display="none";
         break;
-      case 'more':
-        document.getElementById('more-options').style.display="block";
-        document.getElementById('more').style.display="none";
-        document.getElementById('less').style.display="inline-block";
-        break;
-      case 'less':
-        document.getElementById('more-options').style.display="none";
-        document.getElementById('less').style.display="none";
-        document.getElementById('more').style.display="inline-block";
-        break;
       default:
         /*classList selector is not widely supported by modern browsers.
           using className instead. className expects a space delimited
@@ -107,23 +97,17 @@
         <h1>Markdown File Converter</h1>
       </div>
     </div>
-    <!--<div class="row" id="menu">
-      <a href="#form-container">
-        <div class="six columns" onclick="show('form-container');">
-          <h6>Converter</h6>
-        </div>
-      </a>
-      <a href="#reference-container">
-        <div class="six columns" onclick="show('reference-container');">
-          <h6>Reference</h6>
-        </div>
-      </a>
-      <a href="#about-container">
-        <div class="four columns">
-          <h6>About</h6>
-        </div>
+    <div class="row" id="menu">
+      <div class="four columns">
+        <a href="/">Converter</a>
       </div>
-    </div>-->
+      <div class="four columns">
+        <a href="#">Tutorials</a>
+      </div>
+      <div class="four columns">
+        <a href="beta.html">Terms</a>
+      </div>
+    </div>
     <div id="form-container-title" class="row">
       <div class="twelve columns">
         <h2>Parameters</h2>
@@ -152,7 +136,7 @@
             <label for="HTML">HTML</label>
           </div>
           <div id="option-Stand-Alone" style="display: none;">
-            <input type="checkbox" id="Stand-Alone" name="Stand-Alone" value="Stand-Alone">
+            <input type="checkbox" id="Stand-Alone" name="Stand-Alone" value="Stand-Alone" onclick="toggle('stylesheets'); toggle('stylesheet-options');">
             <label for="Stand-Alone">Stand-Alone</label>
           </div>
         </div>
@@ -174,7 +158,7 @@
           <h6>Stylesheet: </h6>
         </div>
       </div>
-      <div class="row options">
+      <div id="stylesheet-options" class="row options">
         <!--"Custom" selection should indeed invoke a vanilla stylesheet for
               preview. -one that matches Pandoc's default formatting-->
         <div class="three columns">
@@ -190,14 +174,12 @@
           <label for="ACM">ACM.css</label>
         </div>
         <div class="three columns">
-          <!--<input type="radio" id="more" name="stylesheet" value="more" onclick="preview('more');">
-          <label for="more">More...</label>-->
-          <div id="more" onclick="preview('more');">
-            <label>more...</label>
-          </div>
-          <div id="less" onclick="preview('less');">
-            <label>fewer</label>
-          </div>
+          <input type="radio" id="Typebase" name="stylesheet" value="Typebase" onclick="preview('typebase');">
+          <label for="Typebase">Typebase.css</label>
+        </div>
+        <div class="three columns:first-child">
+          <input type="radio" id="Getaway" name="stylesheet" value="Getaway" onclick="preview('getaway');">
+          <label for="Getaway">Getaway.css</label>
         </div>
       </div>
       <!--hidden row of stylesheet options-->
@@ -217,7 +199,7 @@
         </div>
       </div>
     </form>
-    <div id="alert" class="alert">
+    <div id="alert" class="alert border">
       <h2>Converting ...</h2>
       <p>Your file will be downloaded momentraily.</p>
       <input type="submit" value="OK" name="submit" onclick="convert('default');"></input>

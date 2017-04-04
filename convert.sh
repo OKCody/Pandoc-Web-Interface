@@ -132,17 +132,17 @@ do
         fi
         echo "HTML Conversion ----------------------" >> debug.txt
         #echo $stylesheet >> debug.txt
-        pandoc $filename.md -f markdown $stylesheet --mathjax -s -o $filename.html 2>>debug.txt
-        #pandoc $filename.md -f markdown $stylesheet -o $filename.html 2>>debug.txt
 
-
-        # stand-alone generation ---------------------
-        if [ $7 == "stand-alone" ];
+        if [ $7 == "null" ];
         then
-            echo "Stand-Alone Generation ----------------------" >> debug.txt
-            cat ../../head.html $filename.html ../../tail.html > sandwich.html
+            # if not creating stand-alone pages, go ahead and use custom stylesheet
+            #   if provided
+            pandoc $filename.md -f markdown $stylesheet --mathjax -s -o $filename.html 2>>debug.txt
+        else
+            # if creating stand-alone pages, ignore all stylesheets. These should
+            # be provided in the provided header
+            pandoc $filename.md -f markdown -o $filename.html 2>>debug.txt
         fi
-        # end stand-alone generation ---------------------
     fi
     # end HTML conversion ---------------------
 
@@ -232,6 +232,39 @@ do
 
   done
 done
+
+# stand-alone generation ---------------------
+if [ $7 == "stand-alone" ];
+then
+    echo "Stand-Alone Generation ----------------------" >> debug.txt
+
+    if [ -a head.html ];
+    then
+        echo "head.html found!" >> debug.txt
+    else
+        echo "head.html not found!  If you'd like to indlude a header, add a file named tail.html containing the header's contents" >> debug.txt
+    fi
+    if [ -a tail.html ];
+    then
+        echo "tail.html found!" >> debug.txt
+    else
+        echo "tail.html not found!  If you'd like to indlude a footer, add a file named tail.html containing the footer's contents" >> debug.txt
+    fi
+
+    mkdir stand-alone/
+
+    for html_file in *.html
+    do
+      if [ $html_file == "head.html" ] || [ $html_file == "tail.html" ];
+      then
+          : # do nothing
+      else
+          cat head.html $html_file tail.html > stand-alone/$html_file
+          rm $html_file
+      fi
+    done
+fi
+# end stand-alone generation ---------------------
 
 # zip all files in working directory into an archive excluding any .zip files
 zip -r converted.zip * -x *.zip
