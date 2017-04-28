@@ -9,7 +9,7 @@
 
 # PHP
 #
-# In etc/php.ini make the following changes
+# In /etc/php/7.0/apache2/php.ini make the following changes
 #   memory_limit = 128M
 #   upload_max_filesize = 100M
 #   post_max_size = 128M
