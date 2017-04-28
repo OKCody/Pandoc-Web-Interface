@@ -4,12 +4,10 @@
 
 All scripts were created with the following assumptions in mind.  Your mileage may vary.
 
-OS Assumptions
-
-Distributor ID:	Ubuntu
-Description:	Ubuntu 16.04.1 LTS
-Release:	16.04
-Codename:	xenial
+- Distributor ID:	Ubuntu
+- Description:	Ubuntu 16.04.1 LTS
+- Release:	16.04
+- Codename:	xenial
 
 ## Setup
 
