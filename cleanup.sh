@@ -4,7 +4,7 @@ cd /var/www/html/
 echo " "
 echo "before clean-up:"
 ls
-rm -rf preview stylesheets *.css *.html *.md *.php *.sh
+rm -rf preview stylesheets *.css *.html *.ini *.md *.php *.sh
 echo " "
 echo "after clean-up:"
 ls
