@@ -130,7 +130,7 @@ if ($stylesheet == "Getaway") {
 // Optins here are passed to convert.sh script and their purposes are detailed
 //  on the first few lines of convert.sh
 
-shell_exec("wait; bash convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4 $output5 $option1");
+shell_exec("wait; bash /srv/pandoc/src/scripts/convert.sh $target_dir/$unique_ID/ $stylesheet $output2 $output3 $output4 $output5 $option1");
 
 if ($message == ''){
     // When executed without error download file directly to index.php
