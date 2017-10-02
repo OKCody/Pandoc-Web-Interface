@@ -14,7 +14,7 @@ $target_file = $_SESSION["target_file"];
 $user = exec('whoami');
 
 // Create unique directory in $target_dir
-shell_exec("mkdir ".escapeshellarg($target_dir/$unique_ID));
+shell_exec("mkdir ".escapeshellarg("$target_dir/$unique_ID"));
 
 $uploadOk = 1;
 $imageFileType = pathinfo($_SESSION["target_file"],PATHINFO_EXTENSION);
