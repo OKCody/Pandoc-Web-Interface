@@ -17,6 +17,8 @@ echo $5 >> debug.txt
 echo $6 >> debug.txt
 echo $7 >> debug.txt
 
+# 
+export PATH="$PATH:/opt/local/wkhtmltox/bin:/usr/local/bin:/usr/bin:/bin"
 
 # If a .zip file is present in unique directory, unzip it. Otherwise move on
 #   to conversion.
